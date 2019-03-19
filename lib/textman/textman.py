@@ -226,13 +226,14 @@ if __name__ == '__main__':
     import seaborn as sns; sns.set()
     
     
-    pwd = '/Users/rca2t/Dropbox/Courses/DSI/DS5559/course-repo-od'
+    pwd = '/Users/rca2t/Dropbox/Courses/DSI/DS5559/UVA_DSI_REPO'
 
     # CHANGE TO LIST FOR IMPLICIT USE OF PREVIOUS
     config = dict()
+    
     config['moby'] = dict(
         clips = dict(
-            src_file = pwd + '/moby.txt',
+            src_file = pwd + '/labs/2019-01-17_Lab01/2701-0.txt',
             start_line = 318,
             end_line = 23238           
         ),
@@ -248,6 +249,7 @@ if __name__ == '__main__':
             src_col = 'chap'
         )                
     )
+    
     config['neuro'] = dict(
         clips = dict(
             src_file = pwd + '/neuromancer.txt'

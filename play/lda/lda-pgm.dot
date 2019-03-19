@@ -1,0 +1,30 @@
+digraph G {
+
+    rankdir=LR
+
+    S1, S2, S3 [shape=plaintext, style=invis]
+    S1 ->  S2 -> S3 [style=invis]
+
+    choose_eta [label="choose\nξ"]
+    choose_N [label="chose\nN"]
+    choose_alpha [label="choose\nα"]
+    choose_theta [label="choose\nθ"]
+
+    choose_eta -> choose_N [label="Poisson(ξ)"]
+    choose_alpha -> choose_theta [label="Dir(α)"]
+    
+    /*
+    alpha, beta [shape=plaintext, fontname=arial, fontsize=10]
+    theta, phi [shape=rect]
+
+    alpha -> theta
+    beta -> phi
+    theta -> zeta 
+    phi -> zeta
+    */
+    /*
+    {rank=same; S1; beta; phi}
+    {rank=same; S2; alpha; theta}
+    {rank=same; S3; zeta}
+    */
+}
