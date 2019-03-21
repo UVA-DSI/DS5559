@@ -1,0 +1,158 @@
+<?xml version='1.0' ?>
+<topics>
+  <topic id="0" alpha="0.005283255936416277" totalTokens="32" titles="ajteel, barb, sysadmin, newsgroups, alternative, ">
+	<word weight="0.40625" count="13">ajteel</word>
+	<word weight="0.21875" count="7">barb</word>
+	<word weight="0.21875" count="7">sysadmin</word>
+	<word weight="0.09375" count="3">newsgroups</word>
+	<word weight="0.0625" count="2">alternative</word>
+	<phrase weight="0.3333333333333333" count="2">ajteel barb</phrase>
+	<phrase weight="0.16666666666666666" count="1">ajteel newsgroups</phrase>
+	<phrase weight="0.16666666666666666" count="1">sysadmin newsgroups sysadmin</phrase>
+	<phrase weight="0.16666666666666666" count="1">sysadmin alternative sysadmin sysadmin</phrase>
+	<phrase weight="0.16666666666666666" count="1">ajteel barb ajteel barb</phrase>
+  </topic>
+  <topic id="1" alpha="0.00660348536286805" totalTokens="10" titles="bryn, vilka, den, ">
+	<word weight="0.5" count="5">bryn</word>
+	<word weight="0.3" count="3">vilka</word>
+	<word weight="0.2" count="2">den</word>
+	<phrase weight="1.0" count="1">den bryn</phrase>
+  </topic>
+  <topic id="2" alpha="0.01009790689196462" totalTokens="15" titles="religion, belief, messiah, koresh, ">
+	<word weight="0.3333333333333333" count="5">religion</word>
+	<word weight="0.26666666666666666" count="4">belief</word>
+	<word weight="0.2" count="3">messiah</word>
+	<word weight="0.2" count="3">koresh</word>
+  </topic>
+  <topic id="3" alpha="0.01957051210262593" totalTokens="19" titles="universe, supernatural, malaysia, asks, belief, survey, pouring, disk, reasoning, alternative">
+	<word weight="0.2631578947368421" count="5">universe</word>
+	<word weight="0.15789473684210525" count="3">supernatural</word>
+	<word weight="0.10526315789473684" count="2">malaysia</word>
+	<word weight="0.10526315789473684" count="2">asks</word>
+	<word weight="0.10526315789473684" count="2">belief</word>
+	<word weight="0.05263157894736842" count="1">survey</word>
+	<word weight="0.05263157894736842" count="1">pouring</word>
+	<word weight="0.05263157894736842" count="1">disk</word>
+	<word weight="0.05263157894736842" count="1">reasoning</word>
+	<word weight="0.05263157894736842" count="1">alternative</word>
+  </topic>
+  <topic id="4" alpha="0.00527619488648878" totalTokens="59" titles="yalanci, vay, org, reference, columbia, dbd, hovig, peace, criminals, sub">
+	<word weight="0.288135593220339" count="17">yalanci</word>
+	<word weight="0.1694915254237288" count="10">vay</word>
+	<word weight="0.11864406779661017" count="7">org</word>
+	<word weight="0.1016949152542373" count="6">reference</word>
+	<word weight="0.06779661016949153" count="4">columbia</word>
+	<word weight="0.06779661016949153" count="4">dbd</word>
+	<word weight="0.06779661016949153" count="4">hovig</word>
+	<word weight="0.06779661016949153" count="4">peace</word>
+	<word weight="0.03389830508474576" count="2">criminals</word>
+	<word weight="0.01694915254237288" count="1">sub</word>
+  </topic>
+  <topic id="5" alpha="0.03246876648805268" totalTokens="19" titles="bank, palestinian, molestation, meaningless, runner, reds, conservative, overwhelming, org, female">
+	<word weight="0.15789473684210525" count="3">bank</word>
+	<word weight="0.15789473684210525" count="3">palestinian</word>
+	<word weight="0.10526315789473684" count="2">molestation</word>
+	<word weight="0.10526315789473684" count="2">meaningless</word>
+	<word weight="0.10526315789473684" count="2">runner</word>
+	<word weight="0.10526315789473684" count="2">reds</word>
+	<word weight="0.10526315789473684" count="2">conservative</word>
+	<word weight="0.05263157894736842" count="1">overwhelming</word>
+	<word weight="0.05263157894736842" count="1">org</word>
+	<word weight="0.05263157894736842" count="1">female</word>
+  </topic>
+  <topic id="6" alpha="0.027528211936314086" totalTokens="18" titles="dealer, processor, courier, modems, centris, canon, goer, floppies, iii, ">
+	<word weight="0.16666666666666666" count="3">dealer</word>
+	<word weight="0.16666666666666666" count="3">processor</word>
+	<word weight="0.1111111111111111" count="2">courier</word>
+	<word weight="0.1111111111111111" count="2">modems</word>
+	<word weight="0.1111111111111111" count="2">centris</word>
+	<word weight="0.1111111111111111" count="2">canon</word>
+	<word weight="0.1111111111111111" count="2">goer</word>
+	<word weight="0.05555555555555555" count="1">floppies</word>
+	<word weight="0.05555555555555555" count="1">iii</word>
+	<phrase weight="1.0" count="1">iii canon canon</phrase>
+  </topic>
+  <topic id="7" alpha="0.020879020083289422" totalTokens="19" titles="boone, international, straight, interesting, barry, sox, azerbaijan, magazine, ">
+	<word weight="0.21052631578947367" count="4">boone</word>
+	<word weight="0.21052631578947367" count="4">international</word>
+	<word weight="0.15789473684210525" count="3">straight</word>
+	<word weight="0.10526315789473684" count="2">interesting</word>
+	<word weight="0.10526315789473684" count="2">barry</word>
+	<word weight="0.10526315789473684" count="2">sox</word>
+	<word weight="0.05263157894736842" count="1">azerbaijan</word>
+	<word weight="0.05263157894736842" count="1">magazine</word>
+  </topic>
+  <topic id="8" alpha="0.006201569394857236" totalTokens="36" titles="mon, teel, eclipse, ida, boulder, requested, overwhelming, interesting, comments, ">
+	<word weight="0.25" count="9">mon</word>
+	<word weight="0.25" count="9">teel</word>
+	<word weight="0.1111111111111111" count="4">eclipse</word>
+	<word weight="0.1111111111111111" count="4">ida</word>
+	<word weight="0.1111111111111111" count="4">boulder</word>
+	<word weight="0.08333333333333333" count="3">requested</word>
+	<word weight="0.027777777777777776" count="1">overwhelming</word>
+	<word weight="0.027777777777777776" count="1">interesting</word>
+	<word weight="0.027777777777777776" count="1">comments</word>
+	<phrase weight="0.3333333333333333" count="3">mon ida</phrase>
+	<phrase weight="0.2222222222222222" count="2">mon mon</phrase>
+	<phrase weight="0.1111111111111111" count="1">comments requested</phrase>
+	<phrase weight="0.1111111111111111" count="1">requested boulder teel boulder</phrase>
+	<phrase weight="0.1111111111111111" count="1">eclipse eclipse eclipse eclipse</phrase>
+	<phrase weight="0.1111111111111111" count="1">overwhelming teel teel</phrase>
+  </topic>
+  <topic id="9" alpha="0.008549381556203666" totalTokens="23" titles="pray, lunch, esther, piece, sub, peace, female, ">
+	<word weight="0.30434782608695654" count="7">pray</word>
+	<word weight="0.21739130434782608" count="5">lunch</word>
+	<word weight="0.13043478260869565" count="3">esther</word>
+	<word weight="0.13043478260869565" count="3">piece</word>
+	<word weight="0.13043478260869565" count="3">sub</word>
+	<word weight="0.043478260869565216" count="1">peace</word>
+	<word weight="0.043478260869565216" count="1">female</word>
+  </topic>
+  <topic id="10" alpha="0.011966027891225611" totalTokens="46" titles="det, min, tor, cgy, umd, ">
+	<word weight="0.2826086956521739" count="13">det</word>
+	<word weight="0.2608695652173913" count="12">min</word>
+	<word weight="0.2391304347826087" count="11">tor</word>
+	<word weight="0.17391304347826086" count="8">cgy</word>
+	<word weight="0.043478260869565216" count="2">umd</word>
+  </topic>
+  <topic id="11" alpha="0.005198498814153076" totalTokens="14" titles="fredericton, binghamton, cup, ">
+	<word weight="0.5714285714285714" count="8">fredericton</word>
+	<word weight="0.35714285714285715" count="5">binghamton</word>
+	<word weight="0.07142857142857142" count="1">cup</word>
+  </topic>
+  <topic id="12" alpha="0.009672917208629145" totalTokens="62" titles="spirit, oneness, concept, trinitarianism, substance, approach, arius, biblical, apologists, plurality">
+	<word weight="0.3548387096774194" count="22">spirit</word>
+	<word weight="0.0967741935483871" count="6">oneness</word>
+	<word weight="0.08064516129032258" count="5">concept</word>
+	<word weight="0.08064516129032258" count="5">trinitarianism</word>
+	<word weight="0.06451612903225806" count="4">substance</word>
+	<word weight="0.06451612903225806" count="4">approach</word>
+	<word weight="0.04838709677419355" count="3">arius</word>
+	<word weight="0.04838709677419355" count="3">biblical</word>
+	<word weight="0.04838709677419355" count="3">apologists</word>
+	<word weight="0.04838709677419355" count="3">plurality</word>
+	<word weight="0.04838709677419355" count="3">theology</word>
+	<word weight="0.016129032258064516" count="1">comments</word>
+	<phrase weight="0.5" count="1">theology theology approach plurality apologists approach spirit apologists trinitarianism oneness oneness spirit spirit</phrase>
+	<phrase weight="0.5" count="1">spirit spirit biblical spirit biblical trinitarianism spirit spirit concept oneness spirit concept comments trinitarianism trinitarianism spirit substance spirit apologists plurality spirit substance approach plurality concept substance spirit substance arius oneness spirit concept oneness biblical spirit spirit concept spirit</phrase>
+  </topic>
+  <topic id="13" alpha="0.004752337170234605" totalTokens="20" titles="hell, atheists, abuse, ">
+	<word weight="0.8" count="16">hell</word>
+	<word weight="0.15" count="3">atheists</word>
+	<word weight="0.05" count="1">abuse</word>
+  </topic>
+  <topic id="14" alpha="0.011057345626839967" totalTokens="37" titles="congress, higher, arguments, reasoning, bush, current, record, somebody, abuse, powers">
+	<word weight="0.2702702702702703" count="10">congress</word>
+	<word weight="0.10810810810810811" count="4">higher</word>
+	<word weight="0.10810810810810811" count="4">arguments</word>
+	<word weight="0.10810810810810811" count="4">reasoning</word>
+	<word weight="0.08108108108108109" count="3">bush</word>
+	<word weight="0.08108108108108109" count="3">current</word>
+	<word weight="0.05405405405405406" count="2">record</word>
+	<word weight="0.05405405405405406" count="2">somebody</word>
+	<word weight="0.05405405405405406" count="2">abuse</word>
+	<word weight="0.02702702702702703" count="1">powers</word>
+	<word weight="0.02702702702702703" count="1">solun</word>
+	<word weight="0.02702702702702703" count="1">piece</word>
+  </topic>
+</topics>

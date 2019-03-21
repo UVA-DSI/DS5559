@@ -1,0 +1,143 @@
+<?xml version='1.0' ?>
+<topicModel>
+  <topic id='0' alpha='0.005283255936416277' totalTokens='32'>
+	<word rank='1' count='13.0'>ajteel</word>
+	<word rank='2' count='7.0'>barb</word>
+	<word rank='3' count='7.0'>sysadmin</word>
+	<word rank='4' count='3.0'>newsgroups</word>
+	<word rank='5' count='2.0'>alternative</word>
+  </topic>
+  <topic id='1' alpha='0.00660348536286805' totalTokens='10'>
+	<word rank='1' count='5.0'>bryn</word>
+	<word rank='2' count='3.0'>vilka</word>
+	<word rank='3' count='2.0'>den</word>
+  </topic>
+  <topic id='2' alpha='0.01009790689196462' totalTokens='15'>
+	<word rank='1' count='5.0'>religion</word>
+	<word rank='2' count='4.0'>belief</word>
+	<word rank='3' count='3.0'>messiah</word>
+	<word rank='4' count='3.0'>koresh</word>
+  </topic>
+  <topic id='3' alpha='0.01957051210262593' totalTokens='19'>
+	<word rank='1' count='5.0'>universe</word>
+	<word rank='2' count='3.0'>supernatural</word>
+	<word rank='3' count='2.0'>malaysia</word>
+	<word rank='4' count='2.0'>asks</word>
+	<word rank='5' count='2.0'>belief</word>
+	<word rank='6' count='1.0'>survey</word>
+	<word rank='7' count='1.0'>pouring</word>
+	<word rank='8' count='1.0'>disk</word>
+	<word rank='9' count='1.0'>reasoning</word>
+	<word rank='10' count='1.0'>alternative</word>
+  </topic>
+  <topic id='4' alpha='0.00527619488648878' totalTokens='59'>
+	<word rank='1' count='17.0'>yalanci</word>
+	<word rank='2' count='10.0'>vay</word>
+	<word rank='3' count='7.0'>org</word>
+	<word rank='4' count='6.0'>reference</word>
+	<word rank='5' count='4.0'>columbia</word>
+	<word rank='6' count='4.0'>dbd</word>
+	<word rank='7' count='4.0'>hovig</word>
+	<word rank='8' count='4.0'>peace</word>
+	<word rank='9' count='2.0'>criminals</word>
+	<word rank='10' count='1.0'>sub</word>
+  </topic>
+  <topic id='5' alpha='0.03246876648805268' totalTokens='19'>
+	<word rank='1' count='3.0'>bank</word>
+	<word rank='2' count='3.0'>palestinian</word>
+	<word rank='3' count='2.0'>molestation</word>
+	<word rank='4' count='2.0'>meaningless</word>
+	<word rank='5' count='2.0'>runner</word>
+	<word rank='6' count='2.0'>reds</word>
+	<word rank='7' count='2.0'>conservative</word>
+	<word rank='8' count='1.0'>overwhelming</word>
+	<word rank='9' count='1.0'>org</word>
+	<word rank='10' count='1.0'>female</word>
+  </topic>
+  <topic id='6' alpha='0.027528211936314086' totalTokens='18'>
+	<word rank='1' count='3.0'>dealer</word>
+	<word rank='2' count='3.0'>processor</word>
+	<word rank='3' count='2.0'>courier</word>
+	<word rank='4' count='2.0'>modems</word>
+	<word rank='5' count='2.0'>centris</word>
+	<word rank='6' count='2.0'>canon</word>
+	<word rank='7' count='2.0'>goer</word>
+	<word rank='8' count='1.0'>floppies</word>
+	<word rank='9' count='1.0'>iii</word>
+  </topic>
+  <topic id='7' alpha='0.020879020083289422' totalTokens='19'>
+	<word rank='1' count='4.0'>boone</word>
+	<word rank='2' count='4.0'>international</word>
+	<word rank='3' count='3.0'>straight</word>
+	<word rank='4' count='2.0'>interesting</word>
+	<word rank='5' count='2.0'>barry</word>
+	<word rank='6' count='2.0'>sox</word>
+	<word rank='7' count='1.0'>azerbaijan</word>
+	<word rank='8' count='1.0'>magazine</word>
+  </topic>
+  <topic id='8' alpha='0.006201569394857236' totalTokens='36'>
+	<word rank='1' count='9.0'>mon</word>
+	<word rank='2' count='9.0'>teel</word>
+	<word rank='3' count='4.0'>eclipse</word>
+	<word rank='4' count='4.0'>ida</word>
+	<word rank='5' count='4.0'>boulder</word>
+	<word rank='6' count='3.0'>requested</word>
+	<word rank='7' count='1.0'>overwhelming</word>
+	<word rank='8' count='1.0'>interesting</word>
+	<word rank='9' count='1.0'>comments</word>
+  </topic>
+  <topic id='9' alpha='0.008549381556203666' totalTokens='23'>
+	<word rank='1' count='7.0'>pray</word>
+	<word rank='2' count='5.0'>lunch</word>
+	<word rank='3' count='3.0'>esther</word>
+	<word rank='4' count='3.0'>piece</word>
+	<word rank='5' count='3.0'>sub</word>
+	<word rank='6' count='1.0'>peace</word>
+	<word rank='7' count='1.0'>female</word>
+  </topic>
+  <topic id='10' alpha='0.011966027891225611' totalTokens='46'>
+	<word rank='1' count='13.0'>det</word>
+	<word rank='2' count='12.0'>min</word>
+	<word rank='3' count='11.0'>tor</word>
+	<word rank='4' count='8.0'>cgy</word>
+	<word rank='5' count='2.0'>umd</word>
+  </topic>
+  <topic id='11' alpha='0.005198498814153076' totalTokens='14'>
+	<word rank='1' count='8.0'>fredericton</word>
+	<word rank='2' count='5.0'>binghamton</word>
+	<word rank='3' count='1.0'>cup</word>
+  </topic>
+  <topic id='12' alpha='0.009672917208629145' totalTokens='62'>
+	<word rank='1' count='22.0'>spirit</word>
+	<word rank='2' count='6.0'>oneness</word>
+	<word rank='3' count='5.0'>concept</word>
+	<word rank='4' count='5.0'>trinitarianism</word>
+	<word rank='5' count='4.0'>substance</word>
+	<word rank='6' count='4.0'>approach</word>
+	<word rank='7' count='3.0'>arius</word>
+	<word rank='8' count='3.0'>biblical</word>
+	<word rank='9' count='3.0'>apologists</word>
+	<word rank='10' count='3.0'>plurality</word>
+	<word rank='11' count='3.0'>theology</word>
+	<word rank='12' count='1.0'>comments</word>
+  </topic>
+  <topic id='13' alpha='0.004752337170234605' totalTokens='20'>
+	<word rank='1' count='16.0'>hell</word>
+	<word rank='2' count='3.0'>atheists</word>
+	<word rank='3' count='1.0'>abuse</word>
+  </topic>
+  <topic id='14' alpha='0.011057345626839967' totalTokens='37'>
+	<word rank='1' count='10.0'>congress</word>
+	<word rank='2' count='4.0'>higher</word>
+	<word rank='3' count='4.0'>arguments</word>
+	<word rank='4' count='4.0'>reasoning</word>
+	<word rank='5' count='3.0'>bush</word>
+	<word rank='6' count='3.0'>current</word>
+	<word rank='7' count='2.0'>record</word>
+	<word rank='8' count='2.0'>somebody</word>
+	<word rank='9' count='2.0'>abuse</word>
+	<word rank='10' count='1.0'>powers</word>
+	<word rank='11' count='1.0'>solun</word>
+	<word rank='12' count='1.0'>piece</word>
+  </topic>
+</topicModel>

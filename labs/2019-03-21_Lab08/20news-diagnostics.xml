@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model>
+<topic id='0' tokens='32.0000' document_entropy='0.0000' word-length='1.9500' coherence='-367.8119' uniform_dist='3.1589' corpus_dist='2.5704' eff_num_words='3.6571' token-doc-diff='0.0471' rank_1_docs='0.0000' allocation_ratio='0.0000' allocation_count='1.0000' exclusivity='0.2211'>
+<word rank='1' count='13' prob='0.40625' cumulative='0.40625' docs='1' word-length='6.0000' coherence='0.0000' uniform_dist='1.4967' corpus_dist='1.0545' token-doc-diff='0.0179' exclusivity='0.9883'>ajteel</word>
+<word rank='2' count='7' prob='0.21875' cumulative='0.62500' docs='1' word-length='4.0000' coherence='0.0000' uniform_dist='0.6705' corpus_dist='0.5678' token-doc-diff='0.0002' exclusivity='0.9785'>barb</word>
+<word rank='3' count='7' prob='0.21875' cumulative='0.84375' docs='1' word-length='8.0000' coherence='0.0000' uniform_dist='0.6705' corpus_dist='0.5678' token-doc-diff='0.0002' exclusivity='0.9785'>sysadmin</word>
+<word rank='4' count='3' prob='0.09375' cumulative='0.93750' docs='1' word-length='10.0000' coherence='0.0000' uniform_dist='0.2079' corpus_dist='0.2433' token-doc-diff='0.0098' exclusivity='0.9514'>newsgroups</word>
+<word rank='5' count='2' prob='0.06250' cumulative='1.00000' docs='1' word-length='11.0000' coherence='0.0000' uniform_dist='0.1133' corpus_dist='0.1369' token-doc-diff='0.0189' exclusivity='0.5255'>alternative</word>
+</topic>
+<topic id='1' tokens='10.0000' document_entropy='0.0000' word-length='0.6000' coherence='-250.1121' uniform_dist='3.5553' corpus_dist='3.7589' eff_num_words='2.6316' token-doc-diff='0.0173' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.1477'>
+<word rank='1' count='5' prob='0.50000' cumulative='0.50000' docs='1' word-length='4.0000' coherence='0.0000' uniform_dist='1.9459' corpus_dist='1.8794' token-doc-diff='0.0084' exclusivity='0.9910'>bryn</word>
+<word rank='2' count='3' prob='0.30000' cumulative='0.80000' docs='1' word-length='5.0000' coherence='0.0000' uniform_dist='1.0143' corpus_dist='1.1277' token-doc-diff='0.0004' exclusivity='0.9851'>vilka</word>
+<word rank='3' count='2' prob='0.20000' cumulative='1.00000' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.5951' corpus_dist='0.7518' token-doc-diff='0.0084' exclusivity='0.9779'>den</word>
+</topic>
+<topic id='2' tokens='15.0000' document_entropy='0.6730' word-length='1.3500' coherence='-336.7737' uniform_dist='3.2225' corpus_dist='3.2453' eff_num_words='3.8136' token-doc-diff='0.0039' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.1824'>
+<word rank='1' count='5' prob='0.33333' cumulative='0.33333' docs='2' word-length='8.0000' coherence='0.0000' uniform_dist='1.1621' corpus_dist='1.1178' token-doc-diff='0.0015' exclusivity='0.9862'>religion</word>
+<word rank='2' count='4' prob='0.26667' cumulative='0.60000' docs='1' word-length='6.0000' coherence='-0.6894' uniform_dist='0.8702' corpus_dist='0.7861' token-doc-diff='0.0024' exclusivity='0.7065'>belief</word>
+<word rank='3' count='3' prob='0.20000' cumulative='0.80000' docs='1' word-length='7.0000' coherence='-4.9042' uniform_dist='0.5951' corpus_dist='0.6707' token-doc-diff='0.0000' exclusivity='0.9773'>messiah</word>
+<word rank='4' count='3' prob='0.20000' cumulative='1.00000' docs='1' word-length='6.0000' coherence='-4.9042' uniform_dist='0.5951' corpus_dist='0.6707' token-doc-diff='0.0000' exclusivity='0.9773'>koresh</word>
+</topic>
+<topic id='3' tokens='19.0000' document_entropy='1.2291' word-length='3.7500' coherence='-662.3601' uniform_dist='2.4564' corpus_dist='2.8588' eff_num_words='7.0784' token-doc-diff='0.0162' rank_1_docs='0.8333' allocation_ratio='0.8333' allocation_count='0.8333' exclusivity='0.3829'>
+<word rank='1' count='5' prob='0.26316' cumulative='0.26316' docs='2' word-length='8.0000' coherence='0.0000' uniform_dist='0.8553' corpus_dist='0.8203' token-doc-diff='0.0055' exclusivity='0.9824'>universe</word>
+<word rank='2' count='3' prob='0.15789' cumulative='0.42105' docs='2' word-length='12.0000' coherence='0.0000' uniform_dist='0.4325' corpus_dist='0.4922' token-doc-diff='0.0001' exclusivity='0.9711'>supernatural</word>
+<word rank='3' count='2' prob='0.10526' cumulative='0.52632' docs='1' word-length='8.0000' coherence='-5.5936' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0006' exclusivity='0.9573'>malaysia</word>
+<word rank='4' count='2' prob='0.10526' cumulative='0.63158' docs='1' word-length='4.0000' coherence='-4.9042' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0006' exclusivity='0.9573'>asks</word>
+<word rank='5' count='2' prob='0.10526' cumulative='0.73684' docs='1' word-length='6.0000' coherence='-4.9042' uniform_dist='0.2457' corpus_dist='0.2125' token-doc-diff='0.0006' exclusivity='0.2822'>belief</word>
+<word rank='6' count='1' prob='0.05263' cumulative='0.78947' docs='1' word-length='6.0000' coherence='-5.5936' uniform_dist='0.0863' corpus_dist='0.1641' token-doc-diff='0.0017' exclusivity='0.9183'>survey</word>
+<word rank='7' count='1' prob='0.05263' cumulative='0.84211' docs='1' word-length='7.0000' coherence='-5.5936' uniform_dist='0.0863' corpus_dist='0.1641' token-doc-diff='0.0017' exclusivity='0.9183'>pouring</word>
+<word rank='8' count='1' prob='0.05263' cumulative='0.89474' docs='1' word-length='4.0000' coherence='-5.5936' uniform_dist='0.0863' corpus_dist='0.1641' token-doc-diff='0.0017' exclusivity='0.9183'>disk</word>
+<word rank='9' count='1' prob='0.05263' cumulative='0.94737' docs='1' word-length='9.0000' coherence='-4.9042' uniform_dist='0.0863' corpus_dist='0.0793' token-doc-diff='0.0017' exclusivity='0.3159'>reasoning</word>
+<word rank='10' count='1' prob='0.05263' cumulative='1.00000' docs='1' word-length='11.0000' coherence='-4.9042' uniform_dist='0.0863' corpus_dist='0.1062' token-doc-diff='0.0017' exclusivity='0.4375'>alternative</word>
+</topic>
+<topic id='4' tokens='59.0000' document_entropy='0.0000' word-length='2.7500' coherence='-490.4158' uniform_dist='2.5266' corpus_dist='1.9295' eff_num_words='6.4107' token-doc-diff='0.0598' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.3983'>
+<word rank='1' count='17' prob='0.28814' cumulative='0.28814' docs='1' word-length='7.0000' coherence='0.0000' uniform_dist='0.9626' corpus_dist='0.5716' token-doc-diff='0.0238' exclusivity='0.9834'>yalanci</word>
+<word rank='2' count='10' prob='0.16949' cumulative='0.45763' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.4763' corpus_dist='0.3363' token-doc-diff='0.0045' exclusivity='0.9722'>vay</word>
+<word rank='3' count='7' prob='0.11864' cumulative='0.57627' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.2911' corpus_dist='0.2195' token-doc-diff='0.0004' exclusivity='0.6789'>org</word>
+<word rank='4' count='6' prob='0.10169' cumulative='0.67797' docs='1' word-length='9.0000' coherence='0.0000' uniform_dist='0.2338' corpus_dist='0.2018' token-doc-diff='0.0000' exclusivity='0.9545'>reference</word>
+<word rank='5' count='4' prob='0.06780' cumulative='0.74576' docs='1' word-length='8.0000' coherence='0.0000' uniform_dist='0.1284' corpus_dist='0.1345' token-doc-diff='0.0016' exclusivity='0.9333'>columbia</word>
+<word rank='6' count='4' prob='0.06780' cumulative='0.81356' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.1284' corpus_dist='0.1345' token-doc-diff='0.0016' exclusivity='0.9333'>dbd</word>
+<word rank='7' count='4' prob='0.06780' cumulative='0.88136' docs='1' word-length='5.0000' coherence='0.0000' uniform_dist='0.1284' corpus_dist='0.1345' token-doc-diff='0.0016' exclusivity='0.9333'>hovig</word>
+<word rank='8' count='4' prob='0.06780' cumulative='0.94915' docs='1' word-length='5.0000' coherence='0.0000' uniform_dist='0.1284' corpus_dist='0.1194' token-doc-diff='0.0016' exclusivity='0.5884'>peace</word>
+<word rank='9' count='2' prob='0.03390' cumulative='0.98305' docs='1' word-length='9.0000' coherence='0.0000' uniform_dist='0.0407' corpus_dist='0.0673' token-doc-diff='0.0085' exclusivity='0.8751'>criminals</word>
+<word rank='10' count='1' prob='0.01695' cumulative='1.00000' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.0086' corpus_dist='0.0101' token-doc-diff='0.0163' exclusivity='0.1139'>sub</word>
+</topic>
+<topic id='5' tokens='19.0000' document_entropy='1.5760' word-length='4.0000' coherence='-681.5217' uniform_dist='2.3523' corpus_dist='2.9346' eff_num_words='8.8049' token-doc-diff='0.0231' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.4081'>
+<word rank='1' count='3' prob='0.15789' cumulative='0.15789' docs='1' word-length='4.0000' coherence='0.0000' uniform_dist='0.4325' corpus_dist='0.4922' token-doc-diff='0.0046' exclusivity='0.9711'>bank</word>
+<word rank='2' count='3' prob='0.15789' cumulative='0.31579' docs='1' word-length='11.0000' coherence='0.0000' uniform_dist='0.4325' corpus_dist='0.4922' token-doc-diff='0.0046' exclusivity='0.9711'>palestinian</word>
+<word rank='3' count='2' prob='0.10526' cumulative='0.42105' docs='1' word-length='11.0000' coherence='-4.9042' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0003' exclusivity='0.9573'>molestation</word>
+<word rank='4' count='2' prob='0.10526' cumulative='0.52632' docs='1' word-length='11.0000' coherence='-4.9042' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0003' exclusivity='0.9573'>meaningless</word>
+<word rank='5' count='2' prob='0.10526' cumulative='0.63158' docs='1' word-length='6.0000' coherence='-4.9042' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0003' exclusivity='0.9573'>runner</word>
+<word rank='6' count='2' prob='0.10526' cumulative='0.73684' docs='2' word-length='4.0000' coherence='-4.9042' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0052' exclusivity='0.9573'>reds</word>
+<word rank='7' count='2' prob='0.10526' cumulative='0.84211' docs='1' word-length='12.0000' coherence='-5.5936' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0003' exclusivity='0.9573'>conservative</word>
+<word rank='8' count='1' prob='0.05263' cumulative='0.89474' docs='1' word-length='12.0000' coherence='-5.5936' uniform_dist='0.0863' corpus_dist='0.1276' token-doc-diff='0.0026' exclusivity='0.6165'>overwhelming</word>
+<word rank='9' count='1' prob='0.05263' cumulative='0.94737' docs='1' word-length='3.0000' coherence='-5.5936' uniform_dist='0.0863' corpus_dist='0.0546' token-doc-diff='0.0026' exclusivity='0.2955'>org</word>
+<word rank='10' count='1' prob='0.05263' cumulative='1.00000' docs='1' word-length='6.0000' coherence='-5.5936' uniform_dist='0.0863' corpus_dist='0.1276' token-doc-diff='0.0026' exclusivity='0.5224'>female</word>
+</topic>
+<topic id='6' tokens='18.0000' document_entropy='1.7211' word-length='2.7500' coherence='-654.8545' uniform_dist='2.4459' corpus_dist='3.1711' eff_num_words='8.1000' token-doc-diff='0.0121' rank_1_docs='1.0000' allocation_ratio='0.8333' allocation_count='1.0000' exclusivity='0.4294'>
+<word rank='1' count='3' prob='0.16667' cumulative='0.16667' docs='1' word-length='6.0000' coherence='0.0000' uniform_dist='0.4655' corpus_dist='0.5285' token-doc-diff='0.0042' exclusivity='0.9726'>dealer</word>
+<word rank='2' count='3' prob='0.16667' cumulative='0.33333' docs='2' word-length='9.0000' coherence='-4.9042' uniform_dist='0.4655' corpus_dist='0.5285' token-doc-diff='0.0008' exclusivity='0.9726'>processor</word>
+<word rank='3' count='2' prob='0.11111' cumulative='0.44444' docs='1' word-length='7.0000' coherence='-5.5936' uniform_dist='0.2653' corpus_dist='0.3523' token-doc-diff='0.0001' exclusivity='0.9595'>courier</word>
+<word rank='4' count='2' prob='0.11111' cumulative='0.55556' docs='1' word-length='6.0000' coherence='-5.5936' uniform_dist='0.2653' corpus_dist='0.3523' token-doc-diff='0.0001' exclusivity='0.9595'>modems</word>
+<word rank='5' count='2' prob='0.11111' cumulative='0.66667' docs='1' word-length='7.0000' coherence='-5.5936' uniform_dist='0.2653' corpus_dist='0.3523' token-doc-diff='0.0001' exclusivity='0.9595'>centris</word>
+<word rank='6' count='2' prob='0.11111' cumulative='0.77778' docs='1' word-length='5.0000' coherence='-5.5936' uniform_dist='0.2653' corpus_dist='0.3523' token-doc-diff='0.0001' exclusivity='0.9595'>canon</word>
+<word rank='7' count='2' prob='0.11111' cumulative='0.88889' docs='1' word-length='4.0000' coherence='-5.5936' uniform_dist='0.2653' corpus_dist='0.3523' token-doc-diff='0.0001' exclusivity='0.9595'>goer</word>
+<word rank='8' count='1' prob='0.05556' cumulative='0.94444' docs='1' word-length='8.0000' coherence='-4.9042' uniform_dist='0.0941' corpus_dist='0.1762' token-doc-diff='0.0032' exclusivity='0.9224'>floppies</word>
+<word rank='9' count='1' prob='0.05556' cumulative='1.00000' docs='1' word-length='3.0000' coherence='-5.5936' uniform_dist='0.0941' corpus_dist='0.1762' token-doc-diff='0.0032' exclusivity='0.9224'>iii</word>
+</topic>
+<topic id='7' tokens='19.0000' document_entropy='1.2969' word-length='3.1500' coherence='-588.1083' uniform_dist='2.6166' corpus_dist='3.0743' eff_num_words='6.5636' token-doc-diff='0.0189' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.3720'>
+<word rank='1' count='4' prob='0.21053' cumulative='0.21053' docs='1' word-length='5.0000' coherence='0.0000' uniform_dist='0.6372' corpus_dist='0.6562' token-doc-diff='0.0101' exclusivity='0.9781'>boone</word>
+<word rank='2' count='4' prob='0.21053' cumulative='0.42105' docs='2' word-length='13.0000' coherence='-4.9042' uniform_dist='0.6372' corpus_dist='0.6562' token-doc-diff='0.0001' exclusivity='0.9781'>international</word>
+<word rank='3' count='3' prob='0.15789' cumulative='0.57895' docs='2' word-length='8.0000' coherence='-5.5936' uniform_dist='0.4325' corpus_dist='0.4922' token-doc-diff='0.0012' exclusivity='0.9711'>straight</word>
+<word rank='4' count='2' prob='0.10526' cumulative='0.68421' docs='1' word-length='11.0000' coherence='-5.5936' uniform_dist='0.2457' corpus_dist='0.2854' token-doc-diff='0.0000' exclusivity='0.7620'>interesting</word>
+<word rank='5' count='2' prob='0.10526' cumulative='0.78947' docs='1' word-length='5.0000' coherence='-5.5936' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0000' exclusivity='0.9573'>barry</word>
+<word rank='6' count='2' prob='0.10526' cumulative='0.89474' docs='1' word-length='3.0000' coherence='-5.5936' uniform_dist='0.2457' corpus_dist='0.3281' token-doc-diff='0.0000' exclusivity='0.9573'>sox</word>
+<word rank='7' count='1' prob='0.05263' cumulative='0.94737' docs='1' word-length='10.0000' coherence='-5.5936' uniform_dist='0.0863' corpus_dist='0.1641' token-doc-diff='0.0037' exclusivity='0.9183'>azerbaijan</word>
+<word rank='8' count='1' prob='0.05263' cumulative='1.00000' docs='1' word-length='8.0000' coherence='-5.5936' uniform_dist='0.0863' corpus_dist='0.1641' token-doc-diff='0.0037' exclusivity='0.9183'>magazine</word>
+</topic>
+<topic id='8' tokens='36.0000' document_entropy='0.0000' word-length='3.2000' coherence='-485.5117' uniform_dist='2.6537' corpus_dist='2.4089' eff_num_words='5.8378' token-doc-diff='0.0686' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.3445'>
+<word rank='1' count='9' prob='0.25000' cumulative='0.25000' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.7997' corpus_dist='0.6195' token-doc-diff='0.0137' exclusivity='0.9811'>mon</word>
+<word rank='2' count='9' prob='0.25000' cumulative='0.50000' docs='1' word-length='4.0000' coherence='0.0000' uniform_dist='0.7997' corpus_dist='0.6195' token-doc-diff='0.0137' exclusivity='0.9811'>teel</word>
+<word rank='3' count='4' prob='0.11111' cumulative='0.61111' docs='1' word-length='7.0000' coherence='0.0000' uniform_dist='0.2653' corpus_dist='0.2753' token-doc-diff='0.0000' exclusivity='0.9585'>eclipse</word>
+<word rank='4' count='4' prob='0.11111' cumulative='0.72222' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.2653' corpus_dist='0.2753' token-doc-diff='0.0000' exclusivity='0.9585'>ida</word>
+<word rank='5' count='4' prob='0.11111' cumulative='0.83333' docs='1' word-length='7.0000' coherence='0.0000' uniform_dist='0.2653' corpus_dist='0.2753' token-doc-diff='0.0000' exclusivity='0.9585'>boulder</word>
+<word rank='6' count='3' prob='0.08333' cumulative='0.91667' docs='1' word-length='9.0000' coherence='0.0000' uniform_dist='0.1750' corpus_dist='0.2065' token-doc-diff='0.0010' exclusivity='0.9455'>requested</word>
+<word rank='7' count='1' prob='0.02778' cumulative='0.94444' docs='1' word-length='12.0000' coherence='0.0000' uniform_dist='0.0278' corpus_dist='0.0496' token-doc-diff='0.0134' exclusivity='0.3312'>overwhelming</word>
+<word rank='8' count='1' prob='0.02778' cumulative='0.97222' docs='1' word-length='11.0000' coherence='0.0000' uniform_dist='0.0278' corpus_dist='0.0383' token-doc-diff='0.0134' exclusivity='0.2054'>interesting</word>
+<word rank='9' count='1' prob='0.02778' cumulative='1.00000' docs='1' word-length='8.0000' coherence='0.0000' uniform_dist='0.0278' corpus_dist='0.0496' token-doc-diff='0.0134' exclusivity='0.5704'>comments</word>
+</topic>
+<topic id='9' tokens='23.0000' document_entropy='0.0000' word-length='1.7000' coherence='-446.2784' uniform_dist='2.8215' corpus_dist='2.7508' eff_num_words='5.1359' token-doc-diff='0.0471' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.2697'>
+<word rank='1' count='7' prob='0.30435' cumulative='0.30435' docs='1' word-length='4.0000' coherence='0.0000' uniform_dist='1.0334' corpus_dist='0.8905' token-doc-diff='0.0149' exclusivity='0.9846'>pray</word>
+<word rank='2' count='5' prob='0.21739' cumulative='0.52174' docs='1' word-length='5.0000' coherence='0.0000' uniform_dist='0.6650' corpus_dist='0.6361' token-doc-diff='0.0039' exclusivity='0.9786'>lunch</word>
+<word rank='3' count='3' prob='0.13043' cumulative='0.65217' docs='1' word-length='6.0000' coherence='0.0000' uniform_dist='0.3324' corpus_dist='0.3816' token-doc-diff='0.0001' exclusivity='0.9649'>esther</word>
+<word rank='4' count='3' prob='0.13043' cumulative='0.78261' docs='1' word-length='5.0000' coherence='0.0000' uniform_dist='0.3324' corpus_dist='0.3441' token-doc-diff='0.0001' exclusivity='0.8029'>piece</word>
+<word rank='5' count='3' prob='0.13043' cumulative='0.91304' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.3324' corpus_dist='0.3441' token-doc-diff='0.0001' exclusivity='0.8558'>sub</word>
+<word rank='6' count='1' prob='0.04348' cumulative='0.95652' docs='1' word-length='5.0000' coherence='0.0000' uniform_dist='0.0630' corpus_dist='0.0572' token-doc-diff='0.0140' exclusivity='0.3723'>peace</word>
+<word rank='7' count='1' prob='0.04348' cumulative='1.00000' docs='1' word-length='6.0000' coherence='0.0000' uniform_dist='0.0630' corpus_dist='0.0971' token-doc-diff='0.0140' exclusivity='0.4343'>female</word>
+</topic>
+<topic id='10' tokens='46.0000' document_entropy='0.4169' word-length='0.7500' coherence='-408.0333' uniform_dist='3.0946' corpus_dist='2.2328' eff_num_words='4.2151' token-doc-diff='0.0211' rank_1_docs='0.6667' allocation_ratio='0.6667' allocation_count='0.6667' exclusivity='0.2409'>
+<word rank='1' count='13' prob='0.28261' cumulative='0.28261' docs='2' word-length='3.0000' coherence='0.0000' uniform_dist='0.9386' corpus_dist='0.6310' token-doc-diff='0.0000' exclusivity='0.9832'>det</word>
+<word rank='2' count='12' prob='0.26087' cumulative='0.54348' docs='2' word-length='3.0000' coherence='-0.6894' uniform_dist='0.8455' corpus_dist='0.5825' token-doc-diff='0.0003' exclusivity='0.9818'>min</word>
+<word rank='3' count='11' prob='0.23913' cumulative='0.78261' docs='1' word-length='3.0000' coherence='-0.6894' uniform_dist='0.7543' corpus_dist='0.5339' token-doc-diff='0.0061' exclusivity='0.9802'>tor</word>
+<word rank='4' count='8' prob='0.17391' cumulative='0.95652' docs='1' word-length='3.0000' coherence='-0.6894' uniform_dist='0.4932' corpus_dist='0.3883' token-doc-diff='0.0008' exclusivity='0.9730'>cgy</word>
+<word rank='5' count='2' prob='0.04348' cumulative='1.00000' docs='1' word-length='3.0000' coherence='-5.5936' uniform_dist='0.0630' corpus_dist='0.0971' token-doc-diff='0.0140' exclusivity='0.9002'>umd</word>
+</topic>
+<topic id='11' tokens='14.0000' document_entropy='0.0000' word-length='1.2000' coherence='-250.1121' uniform_dist='3.7090' corpus_dist='3.4224' eff_num_words='2.1778' token-doc-diff='0.0620' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.1459'>
+<word rank='1' count='8' prob='0.57143' cumulative='0.57143' docs='1' word-length='11.0000' coherence='0.0000' uniform_dist='2.3002' corpus_dist='1.9557' token-doc-diff='0.0159' exclusivity='0.9919'>fredericton</word>
+<word rank='2' count='5' prob='0.35714' cumulative='0.92857' docs='1' word-length='10.0000' coherence='0.0000' uniform_dist='1.2698' corpus_dist='1.2223' token-doc-diff='0.0002' exclusivity='0.9872'>binghamton</word>
+<word rank='3' count='1' prob='0.07143' cumulative='1.00000' docs='1' word-length='3.0000' coherence='0.0000' uniform_dist='0.1390' corpus_dist='0.2445' token-doc-diff='0.0460' exclusivity='0.9394'>cup</word>
+</topic>
+<topic id='12' tokens='62.0000' document_entropy='0.1937' word-length='4.9500' coherence='-483.8984' uniform_dist='2.4323' corpus_dist='1.9231' eff_num_words='5.9321' token-doc-diff='0.0406' rank_1_docs='0.5000' allocation_ratio='0.5000' allocation_count='1.0000' exclusivity='0.5282'>
+<word rank='1' count='22' prob='0.35484' cumulative='0.35484' docs='2' word-length='6.0000' coherence='0.0000' uniform_dist='1.2593' corpus_dist='0.6864' token-doc-diff='0.0204' exclusivity='0.9865'>spirit</word>
+<word rank='2' count='6' prob='0.09677' cumulative='0.45161' docs='1' word-length='7.0000' coherence='-0.6894' uniform_dist='0.2177' corpus_dist='0.1872' token-doc-diff='0.0006' exclusivity='0.9522'>oneness</word>
+<word rank='3' count='5' prob='0.08065' cumulative='0.53226' docs='1' word-length='7.0000' coherence='-0.6894' uniform_dist='0.1667' corpus_dist='0.1560' token-doc-diff='0.0000' exclusivity='0.9432'>concept</word>
+<word rank='4' count='5' prob='0.08065' cumulative='0.61290' docs='1' word-length='14.0000' coherence='-0.6894' uniform_dist='0.1667' corpus_dist='0.1560' token-doc-diff='0.0000' exclusivity='0.9432'>trinitarianism</word>
+<word rank='5' count='4' prob='0.06452' cumulative='0.67742' docs='1' word-length='9.0000' coherence='-0.6894' uniform_dist='0.1190' corpus_dist='0.1248' token-doc-diff='0.0003' exclusivity='0.9301'>substance</word>
+<word rank='6' count='4' prob='0.06452' cumulative='0.74194' docs='1' word-length='8.0000' coherence='-0.6894' uniform_dist='0.1190' corpus_dist='0.1248' token-doc-diff='0.0003' exclusivity='0.9301'>approach</word>
+<word rank='7' count='3' prob='0.04839' cumulative='0.79032' docs='1' word-length='5.0000' coherence='-0.6894' uniform_dist='0.0753' corpus_dist='0.0936' token-doc-diff='0.0016' exclusivity='0.9089'>arius</word>
+<word rank='8' count='3' prob='0.04839' cumulative='0.83871' docs='1' word-length='8.0000' coherence='-0.6894' uniform_dist='0.0753' corpus_dist='0.0936' token-doc-diff='0.0016' exclusivity='0.9089'>biblical</word>
+<word rank='9' count='3' prob='0.04839' cumulative='0.88710' docs='1' word-length='10.0000' coherence='-0.6894' uniform_dist='0.0753' corpus_dist='0.0936' token-doc-diff='0.0016' exclusivity='0.9089'>apologists</word>
+<word rank='10' count='3' prob='0.04839' cumulative='0.93548' docs='1' word-length='9.0000' coherence='-0.6894' uniform_dist='0.0753' corpus_dist='0.0936' token-doc-diff='0.0016' exclusivity='0.9089'>plurality</word>
+<word rank='11' count='3' prob='0.04839' cumulative='0.98387' docs='1' word-length='8.0000' coherence='-0.6894' uniform_dist='0.0753' corpus_dist='0.0936' token-doc-diff='0.0016' exclusivity='0.9089'>theology</word>
+<word rank='12' count='1' prob='0.01613' cumulative='1.00000' docs='1' word-length='8.0000' coherence='-0.6894' uniform_dist='0.0074' corpus_dist='0.0200' token-doc-diff='0.0108' exclusivity='0.3340'>comments</word>
+</topic>
+<topic id='13' tokens='20.0000' document_entropy='0.0000' word-length='0.8500' coherence='0.0000' uniform_dist='3.9721' corpus_dist='3.0108' eff_num_words='1.5038' token-doc-diff='0.1260' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.1211'>
+<word rank='1' count='16' prob='0.80000' cumulative='0.80000' docs='1' word-length='4.0000' coherence='0.0000' uniform_dist='3.4895' corpus_dist='2.4526' token-doc-diff='0.0495' exclusivity='0.9941'>hell</word>
+<word rank='2' count='3' prob='0.15000' cumulative='0.95000' docs='1' word-length='8.0000' coherence='0.0000' uniform_dist='0.4032' corpus_dist='0.4599' token-doc-diff='0.0178' exclusivity='0.9695'>atheists</word>
+<word rank='3' count='1' prob='0.05000' cumulative='1.00000' docs='1' word-length='5.0000' coherence='0.0000' uniform_dist='0.0795' corpus_dist='0.0984' token-doc-diff='0.0586' exclusivity='0.4577'>abuse</word>
+</topic>
+<topic id='14' tokens='37.0000' document_entropy='0.2103' word-length='3.9000' coherence='-531.5611' uniform_dist='2.3365' corpus_dist='2.3670' eff_num_words='7.5635' token-doc-diff='0.0550' rank_1_docs='1.0000' allocation_ratio='1.0000' allocation_count='1.0000' exclusivity='0.4825'>
+<word rank='1' count='10' prob='0.27027' cumulative='0.27027' docs='1' word-length='8.0000' coherence='0.0000' uniform_dist='0.8856' corpus_dist='0.6623' token-doc-diff='0.0285' exclusivity='0.9825'>congress</word>
+<word rank='2' count='4' prob='0.10811' cumulative='0.37838' docs='1' word-length='6.0000' coherence='0.0000' uniform_dist='0.2552' corpus_dist='0.2649' token-doc-diff='0.0013' exclusivity='0.9574'>higher</word>
+<word rank='3' count='4' prob='0.10811' cumulative='0.48649' docs='2' word-length='9.0000' coherence='0.0000' uniform_dist='0.2552' corpus_dist='0.2649' token-doc-diff='0.0020' exclusivity='0.9574'>arguments</word>
+<word rank='4' count='4' prob='0.10811' cumulative='0.59459' docs='1' word-length='9.0000' coherence='-0.6894' uniform_dist='0.2552' corpus_dist='0.2408' token-doc-diff='0.0013' exclusivity='0.6572'>reasoning</word>
+<word rank='5' count='3' prob='0.08108' cumulative='0.67568' docs='1' word-length='4.0000' coherence='-0.6894' uniform_dist='0.1681' corpus_dist='0.1987' token-doc-diff='0.0000' exclusivity='0.9441'>bush</word>
+<word rank='6' count='3' prob='0.08108' cumulative='0.75676' docs='1' word-length='7.0000' coherence='-0.6894' uniform_dist='0.1681' corpus_dist='0.1987' token-doc-diff='0.0000' exclusivity='0.9441'>current</word>
+<word rank='7' count='2' prob='0.05405' cumulative='0.81081' docs='1' word-length='6.0000' coherence='-0.6894' uniform_dist='0.0901' corpus_dist='0.1325' token-doc-diff='0.0010' exclusivity='0.9185'>record</word>
+<word rank='8' count='2' prob='0.05405' cumulative='0.86486' docs='1' word-length='8.0000' coherence='-0.6894' uniform_dist='0.0901' corpus_dist='0.1325' token-doc-diff='0.0010' exclusivity='0.9185'>somebody</word>
+<word rank='9' count='2' prob='0.05405' cumulative='0.91892' docs='1' word-length='5.0000' coherence='-0.6894' uniform_dist='0.0901' corpus_dist='0.1105' token-doc-diff='0.0010' exclusivity='0.5012'>abuse</word>
+<word rank='10' count='1' prob='0.02703' cumulative='0.94595' docs='1' word-length='6.0000' coherence='-0.6894' uniform_dist='0.0263' corpus_dist='0.0662' token-doc-diff='0.0062' exclusivity='0.8497'>powers</word>
+<word rank='11' count='1' prob='0.02703' cumulative='0.97297' docs='1' word-length='5.0000' coherence='-4.9042' uniform_dist='0.0263' corpus_dist='0.0662' token-doc-diff='0.0062' exclusivity='0.8497'>solun</word>
+<word rank='12' count='1' prob='0.02703' cumulative='1.00000' docs='1' word-length='5.0000' coherence='-4.9042' uniform_dist='0.0263' corpus_dist='0.0288' token-doc-diff='0.0062' exclusivity='0.1692'>piece</word>
+</topic>
+</model>
+
