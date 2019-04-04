@@ -8,22 +8,23 @@ Created on Wed Dec 12 22:05:54 2018
 
 * Converts work done in First Foray notebooks into functions. Next
 step is to create an object model.
-* Containers above sentence and token should be user defined, 
-but sentences and tokens should not be, 
+* Containers above sentence and token should be user defined,
+but sentences and tokens should not be,
 * POS tagging applies to DOCTERM (i.e. tokens), not to TERM (vocab)
 * We create DOCTERM from the source data and derive the TERM and DOC tables
-from it. We use the derived tables to park informaton where it goes. We 
+from it. We use the derived tables to park informaton where it goes. We
 use the model to understand what we are doing!
 
 """
 
-# %% Imports 
+# %% Imports
 
 import pandas as pd
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import numpy as np
+import sqlite3
 
 # %% Main Functions
 
@@ -104,11 +105,11 @@ def link_tokens_to_vocab(tokens, vocab, drop=False):
 # Todo: Codify these assumptions in config
 def identify_stopwords(vocab):
     sw = set(stopwords.words('english'))
-    vocab['sw'] = vocab.apply(lambda x: 
-        x.term in sw 
-        or len(x.term) <= 2 
+    vocab['sw'] = vocab.apply(lambda x:
+        x.term in sw
+        or len(x.term) <= 2
         or not x.term.isalpha()
-        or x.n < 3, 
+        or x.n < 3,
         axis=1)
     vocab['go'] = ~vocab.sw
     return vocab
@@ -155,11 +156,8 @@ def compute_tfidf(dtm, vocab, doc, bow, sw=False):
     bow['tfidf'] = dtm_tfidf.stack().to_frame().rename(columns={0:'tfidf'})
     return dtm_tfidf, vocab, doc, bow
 
-def compute_tfidh():
-    pass
-
 def get_term_id(vocab, term):
-    term_id = vocab[vocab.term==term].index[0] 
+    term_id = vocab[vocab.term==term].index[0]
     return term_id
 
 def get_term(vocab, term_id):
@@ -204,7 +202,7 @@ def add_doc_len_features(df, str_col, prefix='doc_'):
 def put_to_db(db, df, table_name, index=True, if_exists='replace'):
     r = df.to_sql(table_name, db, index=index, if_exists=if_exists)
     return r
-    
+
 def get_from_db(db, table_name):
     df = pd.read_sql("SELECT * FROM {}".format(table_name), db)
     return df
@@ -216,162 +214,12 @@ def get_pca(df, k=2):
     X.index = df.index.tolist()
     return X
 
+def get_table(table, db_file, fields='*', index_col=None):
+    if type(fields) is list:
+        fields = ','.join(fields)
+    with sqlite3.connect(db_file) as db:
+        return pd.read_sql("select {} from {}".format(fields, table), db, index_col=index_col)
 
-# %% Test Scripts
-
-if __name__ == '__main__':
-
-    
-    import matplotlib.pyplot as plt
-    import seaborn as sns; sns.set()
-    
-    
-    pwd = '/Users/rca2t/Dropbox/Courses/DSI/DS5559/UVA_DSI_REPO'
-
-    # CHANGE TO LIST FOR IMPLICIT USE OF PREVIOUS
-    config = dict()
-    
-    config['moby'] = dict(
-        clips = dict(
-            src_file = pwd + '/labs/2019-01-17_Lab01/2701-0.txt',
-            start_line = 318,
-            end_line = 23238           
-        ),
-        chap = dict(
-            div_name = 'chap',
-            div_pat = r'^(?:ETYMOLOGY|CHAPTER \d+|Epilog)',
-            src_idx = 'line_id',
-            src_col = 'line'
-        ),
-        para = dict(
-            div_name = 'para',
-            div_pat = r'\n\n+',
-            src_col = 'chap'
-        )                
-    )
-    
-    config['neuro'] = dict(
-        clips = dict(
-            src_file = pwd + '/neuromancer.txt'
-        ),
-        part = dict(
-            div_name = 'part',
-            div_pat = r'^\* PART ',
-            src_idx = 'line_id',
-            src_col = 'line'
-        ),
-        chap = dict(
-            div_name = 'chap',
-            div_pat = r'^\*\* CHAPTER \d+',
-            src_idx = 'part_id',
-            src_col = 'part'
-        ),
-        para = dict(
-            div_name = 'para',
-            div_pat = r'\n\n+',
-            src_col = 'chap'
-        )                
-    )
-
-#%%
-    print("SRC")
-    src = import_source(**config['moby']['clips'])
-
-#%%
-    print("CHAP")
-    chaps = group_by_milestone(src, **config['moby']['chap'])
-    
-#%%
-    print("PARA")
-    paras = split_by_delimitter(chaps, **config['moby']['para'])
-
-#%% Vocabulary 
-    
-    print("VOCAB")
-    tokens, vocab = create_tokens_and_vocab(paras, drop=True)
-    
-#%% Doc
-    
-    print("DOC")
-    doc = create_doc_table(tokens, ['chap_id'])
-    
-#%% BOW
-    
-    print("BOW")
-    bow = create_bow(tokens, ['chap_id', 'term_id'])
-    
-#%% DTM
-    
-    print("DTM")
-    dtm = create_dtm(bow)
-
-#%% TFIDF 
-    
-    print("TFIDF")
-    tfidf, vocab, doc, bow = compute_tfidf(dtm, vocab, doc, bow)
-    
-#%% Plots
-
-    print("PLOTS")
-    tfidf.sum(1).plot(figsize=(10,2))
-    tfidf[[get_term_id(vocab, 'ahab'),get_term_id(vocab, 'whale')]].plot(figsize=(10,2))
-    
-        
-#%% PCA -- NEED TO WINNOW THE WORDS
-    print("PCA")
-    c = 2
-    X = get_pca(tfidf.T, c)
-    
-#%% Plot PCs
-    
-    # We define these because sklearn removes indides
-#    term_ids = tfidf.T.index.tolist()
-    terms = vocab.loc[term_ids].term.tolist()
-    
-    SIZE = (10,10)
-    for i in range(c):
-        for j in range(i+1,c):
-            fig, ax = plt.subplots()
-            X.plot(kind='scatter', x=i, y=j, figsize=SIZE, ax=ax, sharex=True)
-            for k, v in X[[i,j]].iterrows():
-                ax.annotate(vocab.loc[k].term, v)
-
-#%% Thunder, Oil, Lamps, and Rum
-
-    for id in X.idxmax().tolist():
-        term = vocab.loc[id].term
-        print(id, term)
-    
-    for id in X.idxmin().tolist():
-        term = vocab.loc[id].term
-        print(id, term)       
-
-#%% 
-    pc = -1
-    for a, b in zip(X.idxmax().tolist(), X.idxmin().tolist()):
-        pc += 1
-        term_a = vocab.loc[a].term
-        term_b = vocab.loc[b].term
-        print("PC {}: {} -- {}".format(pc, term_a, term_b))
-    
-#%% Extra
-        
-    # C = tfidf - tfidf.mean()
-
-    # from numpy import cov
-    # from numpy.linalg import eig
-
-    # print("covariance")
-    # V = cov(C.T)
-    # #print(V)
-
-    # print("eigen")
-    # values, vectors = eig(V)
-    # # print(vectors)
-    # # print(values)
-    # # # project data
-
-    # print("project")
-    # P = vectors.T.dot(C.T)
-    # # print(P.T)# -*- coding: utf-8 -*-
-
+def get_sql(sql, db_file, params=None):
+    with sqlite3.connect(db_file) as db:
+        return pd.read_sql(sql, db, params)
