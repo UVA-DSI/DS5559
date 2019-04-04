@@ -1,0 +1,13 @@
+
+num-topics = {num_topics} 
+mynum-iterations = {num_iters} 
+myoutput-doc-topics = 20news-doc-topics.txt 
+myoutput-topic-keys = 20news-topic-keys.txt 
+myword-topic-counts-file = 20news-word-topic-counts-file.txt 
+mytopic-word-weights-file = 20news-topic-word-weights-file.txt 
+myxml-topic-report = 20news-topic-report.xml 
+myxml-topic-phrase-report = 20news-topic-phrase-report.xml 
+myshow-topics-interval {show_interval} 
+myuse-symmetric-alpha = false  
+myoptimize-interval = 100 
+mydiagnostics-file = 20news-diagnostics.xml
