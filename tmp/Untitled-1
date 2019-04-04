@@ -1,0 +1,198 @@
+---
+theme: "white"
+customTheme : "default"
+transition: "none"
+---
+
+# Lab 10
+
+**Raf Alvarado**
+
+DS 5559  
+04 April 2019
+
+---
+
+## Review
+
+* Word Embeddings not just about analogy
+  * Similarity
+  * Plurals -- $[apple] - [apples] = [car] - [cars]$
+  * Relations
+* GloVe produces embeddings by factorizing the logarithm of the corpus word co-occurrence matrix.
+  * [blog](https://github.com/maciejkula/glove-python/)
+
+--- 
+
+## Data Flows
+
+```text
+F0
+F1
+F2
+F3
+```
+
+---
+
+## Vocabulary
+
+* Distributional Semantics,  Word Embeddings
+* Skipgram, CBOW
+* word2vec, GloVe
+
+---
+
+## Plan
+
+* Implement from scratch
+  * PPMI
+  * SVD
+  * word2vec
+  * GloVe
+* Explore trained embeddings
+* Use Gensim's word2vec
+* Visualize
+* Explore semantic space
+
+---
+
+## Code and Data
+
+* [Historical Words](https://nlp.stanford.edu/projects/histwords/)
+* Word2Vec from scratch
+  * [Implement Your Own Word2Vec Skipgram Model](https://www.geeksforgeeks.org/implement-your-own-word2vecskip-gram-model-in-python/)
+  * [Jupyter Notebook implementation](https://github.com/ujhuyz0110/wrd_emb/blob/master/word2vec_skipgram_medium_v1.ipynb)
+  * [wrd_emb](https://github.com/ujhuyz0110/wrd_emb)
+  * [word2vec server](https://github.com/RaRe-Technologies/w2v_server_googlenews)
+  * See
+    * [Making Sense of  Word2Vec](https://rare-technologies.com/making-sense-of-word2vec/)
+    * [Word2vec from Scratch with NumPy](https://towardsdatascience.com/word2vec-from-scratch-with-numpy-8786ddd49e72)
+    * [Tutorial](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+* GloVe from scratch
+  * [glove-python](https://github.com/maciejkula/glove-python/)
+  * See [Pennington, Socher, and Manning on GloVe](https://nlp.stanford.edu/projects/glove/)
+
+--- 
+
+## Data
+
+[Hacker News Corpus](https://zenodo.org/record/49899#.XKSzletKhQI)
+
+---
+
+## word2vec
+
+* word2vec ultimately learns word vectors and word context vectors.
+* These can be viewed as two 2D matrices (of floats), of size #words x #dim each.
+
+---
+
+## GloVe
+
+* A log-bilinear model with a weighted least-squares objective. 
+* The main intuition --  **ratios** of word-word co-occurrence probabilities encode  meaning (in some form)
+* Training objective is to learn word vectors such that their dot product equals the logarithm of the words' probability of co-occurrence 
+* Where word2vec is hazy about what’s going on underneath, GloVe explicitly names the “objective” matrix, identifies the factorization, and provides some intuitive justification as to why this should give us working similarities.
+
+---
+
+### GloVe Example
+
+Actual probabilities (from a 6 billion word corpus) of the  co-occurrence probabilities for **target words** 'ice' and 'steam' with various **probe words** from the vocabulary:
+
+![glove table](images/glove-model-table.png)
+
+---
+
+## Pre-trained Word Vectors
+
+* **Wikipedia 2014 + Gigaword 5**
+  * 6B tokens, 400K vocab, uncased, 50d, 100d, 200d, & 300d vectors, 822 MB
+  * [glove.6B.zip](http://nlp.stanford.edu/data/glove.6B.zip)
+* **Common Crawl**
+  * 42B tokens, 1.9M vocab, uncased, 300d vectors, 1.75 GB
+  * [glove.42B.300d.zip](http://nlp.stanford.edu/data/glove.42B.300d.zip)
+* **Common Crawl**
+  * 840B tokens, 2.2M vocab, cased, 300d vectors, 2.03 GB
+  * [glove.840B.300d.zip](http://nlp.stanford.edu/data/glove.840B.300d.zip)
+* **Twitter**
+  * 2B tweets, 27B tokens, 1.2M vocab, uncased, 25d, 50d, 100d, & 200d vectors, 1.42 GB
+  * [glove.twitter.27B.zip](http://nlp.stanford.edu/data/glove.twitter.27B.zip)
+
+---
+
+## Analogy in Semantic Algebra
+
+```text
+                      A - B + C = D
+                            -
+                       A ------- B
+                            |
+                            |       +
+                            |
+                       C ------- D
+                            =
+        v(King) - v(Male) + v(Female) ~= v(Queen)
+```
+
+---
+
+## Terms of  Analogy as Subject and Predicate
+
+```text
+                        A ------- B
+                             |
+                             |
+                             |
+                        C ------- D
+
+                A and C are Subjects (S1, S2)
+                B and D are Predicates (P1, P2)
+
+                     S1 - P1 + P2 = S2
+```
+
+Hypothesis &mdash; The semantic algebra invovles replacing predicates to infer subjects
+
+If so, *we can use collections of analogies in a propositional calculus to make knowledge claims*
+
+---
+
+## IMPLEMENTATIONS
+
+* Although word embeddings can be generated in a variety of ways, by far the most common methods today are based on the SGNS method
+  * [word2vec](https://code.google.com/archive/p/word2vec/)
+    * Developed by Tomáš Mikolov with colleagues at Google in 2013
+    * "... an efficient implementation of the continuous bag-of-words and skip-gram architectures for computing vector representations of words. These representations can be subsequently used in many natural language processing applications and for further research."
+  * [GloVe](https://nlp.stanford.edu/projects/glove/)
+    * "Global Vectors for Word Representation"
+    * Developed by Stanford's Natural Language Processing Group
+    * Also provides pretrained libraries
+
+---
+
+#### SQL
+
+```sql
+WITH mytoken(author, book, chapter, para_num, sent_num,token_num,term_str,term_id) 
+    AS (
+        SELECT author, book, chapter, para_num, sent_num,token_num,term_str,term_id
+        FROM token 
+        WHERE term_id IN (SELECT term_id FROM vocab WHERE stop = 0) 
+            AND term_str is not NULL
+            AND pos NOT LIKE 'NNP_'
+    )
+SELECT x.term_str as core, y.term_str as partner, (y.token_num - x.token_num) AS dist
+FROM mytoken x JOIN mytoken y USING(author, book, chapter, para_num, sent_num)
+WHERE y.token_num IN (x.token_num - 2, x.token_num - 1, x.token_num + 1, x.token_num + 2)
+ORDER BY core, dist, partner
+```
+
+SQL to covert tokens table into words and window contexts of lengh 2
+
+---
+
+## Normalized PMI
+
+* See [Bouma](https://pdfs.semanticscholar.org/1521/8d9c029cbb903ae7c729b2c644c24994c201.pdf)
