@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond|Roboto+Condensed');
+
+.slides section {
+    top: 1in;
+}
+
+.reveal h1, .reveal h2 {
+    color: darkorange;
+}
+
+.reveal h1 {
+    font-size: 32pt;
+    text-align: left;
+    text-transform: none;
+    /* font-family: 'EB Garamond', serif;  */
+    font-family: 'Roboto Condensed', sans-serif;
+    /* font-family: "Futura", Helvetica, sans-serif; */
+}
+
+.reveal h2 {
+    font-size: 28pt;
+    text-align: left;
+    text-transform: none;
+    /* font-family: 'EB Garamond', serif; */
+    font-family: 'Roboto Condensed', sans-serif;
+    /* font-family: "Futura", Helvetica, sans-serif; */
+}
+
+.reveal p, td, li {
+    color: navy;
+    font-size: 20pt;
+    margin-bottom: .5rem;
+    display: block;
+    line-height: 24pt;
+    /* font-family: 'EB Garamond', serif;  */
+    font-family: 'Roboto Condensed', sans-serif;
+    /* font-family: "Futura", Helvetica, sans-serif; */
+}
+
+.reveal strong {
+    font-size: 100%;
+    font-weight: normal;
+    /* text-decoration: underline; */
+    border-bottom: 5px solid orange;
+}
+
+.reveal ol, .reveal ul {
+    margin-bottom: .5rem;
+    margin-left: -1.5rem;
+    text-align: left;
+    display: block;
+}
+
+.reveal li {
+    list-style-type: none;
+    margin-top: 1rem;
+    margin-left: -1rem;
+}
+
+.reveal li li {
+    /* margin-left: .5rem; */
+}
+
+.reveal section img {
+    border: 0;
+    box-shadow:none;
+}
+
+.reveal.plain img {
+    border:0; 
+    box-shadow:none;
+}
+
+#title-footer p {
+    font-size: 12pt;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.slide.center * {
+    text-align: center;
+}
+
+.no-title h1, 
+.no-title h2 {
+    display: none;
+}
+
+#title-slide h1 {
+    text-align: center;
+}
+
+#title-slide  p.author {
+    font-weight: bold;
+}
+
+#title-slide p.date {}
+
+#title-slide p.subtitle {
+    font-variant: small-caps;
+}
+
+figure {
+    margin: 0;
+}
+
+figcaption {
+    font-size: 18pt;
+    /* font-family: 'EB Garamond', serif;  */
+    font-family: 'Roboto Condensed', sans-serif;
+    /* font-family: "Futura", Helvetica, sans-serif; */
+}
+
+.small-caps {
+    font-variant: small-caps;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.reveal .larger * {
+    font-size: 105%;
+    line-height: 105%;
+}
+
+.reveal .assertion * {
+    text-align: center;
+    font-size: 24pt;
+    /* line-height: 105%; */
+}
+
+.reveal .assertion h1, 
+.reveal .assertion h2 {
+    display: none;
+}
+
+.reveal a {
+    border-bottom: 2px dotted red;
+}
