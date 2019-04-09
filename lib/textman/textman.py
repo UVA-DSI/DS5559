@@ -17,16 +17,12 @@ use the model to understand what we are doing!
 
 """
 
-# %% Imports
-
 import pandas as pd
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import numpy as np
 import sqlite3
-
-# %% Main Functions
 
 def import_source(src_file, start_line=None, end_line=None, col_name='line', id_name='line_id', strip=True):
     print('src_file', src_file)
@@ -199,13 +195,7 @@ def add_doc_len_features(df, str_col, prefix='doc_'):
     df[prefix + 'h'] = df[prefix+'p'].multiply(np.log2(df[prefix+'p'])) * -1
     return df
 
-def put_to_db(db, df, table_name, index=True, if_exists='replace'):
-    r = df.to_sql(table_name, db, index=index, if_exists=if_exists)
-    return r
-
-def get_from_db(db, table_name):
-    df = pd.read_sql("SELECT * FROM {}".format(table_name), db)
-    return df
+# %% Database Functions
 
 def get_pca(df, k=2):
     from sklearn.decomposition import PCA
@@ -213,6 +203,14 @@ def get_pca(df, k=2):
     X = pd.DataFrame(pca.fit_transform(df))
     X.index = df.index.tolist()
     return X
+
+def put_to_db(db, df, table_name, index=True, if_exists='replace'):
+    r = df.to_sql(table_name, db, index=index, if_exists=if_exists)
+    return r
+
+def get_from_db(db, table_name):
+    df = pd.read_sql("SELECT * FROM {}".format(table_name), db)
+    return df
 
 def get_table(table, db_file, fields='*', index_col=None):
     if type(fields) is list:
