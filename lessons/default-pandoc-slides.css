@@ -39,9 +39,10 @@
 
 .reveal strong {
     font-size: 100%;
-    font-weight: normal;
+    font-weight: bold;
+    color: darkorange;
     /* text-decoration: underline; */
-    border-bottom: 5px solid orange;
+    /* border-bottom: 5px solid orange; */
 }
 
 .reveal ol, .reveal ul {
@@ -52,13 +53,12 @@
 }
 
 .reveal li {
-    list-style-type: none;
     margin-top: 1rem;
     margin-left: -1rem;
 }
 
-.reveal li li {
-    /* margin-left: .5rem; */
+.reveal ul li {
+    list-style-type: none;
 }
 
 .reveal section img {
@@ -129,8 +129,8 @@ figcaption {
 
 .reveal .assertion * {
     text-align: center;
-    font-size: 24pt;
-    /* line-height: 105%; */
+    font-size: 28pt;
+    line-height: 36pt; 
 }
 
 .reveal .assertion h1, 
@@ -141,3 +141,32 @@ figcaption {
 .reveal a {
     border-bottom: 2px dotted red;
 }
+
+.reveal .float-left {
+    float: left;
+}
+
+.reveal .float-right {
+    float: right;
+}
+
+.reveal .align-left {
+    text-align: left;
+}
+
+.reveal .space-left {
+    margin-left: 2rem;
+}
+
+.reveal blockquote {
+    border: none;
+    background: none;
+    box-shadow: none;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.reveal blockquote p {
+    text-align: left;
+}
+
+

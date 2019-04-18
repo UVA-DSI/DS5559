@@ -12,4 +12,4 @@ pandoc -t revealjs -s -o $1.html $1.md \
     -V progress=true \
     -V slideNumber=true \
     --css default-pandoc-slides.css \
-    --slide-level=1
+    --slide-level=1 
