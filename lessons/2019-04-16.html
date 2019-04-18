@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Raf Alvarado">
+  <meta name="dcterms.date" content="2019-04-16">
+  <title>Sentiment Analysis 2 Syuzhet</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://revealjs.com/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="https://revealjs.com/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="default-pandoc-slides.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://revealjs.com/css/print/pdf.css' : 'https://revealjs.com/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://revealjs.com/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Sentiment Analysis 2<br/>Syuzhet</h1>
+  <p class="subtitle">UVA DS 5559</p>
+  <p class="author">Raf Alvarado</p>
+  <p class="date">16 April 2019</p>
+</section>
+
+<section id="business" class="slide level1">
+<h1>Business</h1>
+<ul>
+<li>MALLET not required for topic modeling</li>
+<li>You can use SKLearn to create TFIDF matrix if your corpus is large
+<ul>
+<li>But realize that it does not let you filter for Part of Speech, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="review" class="slide level1">
+<h1>Review</h1>
+<ul>
+<li><strong>Sentiment Analysis</strong> a specific case of <strong>content analysis</strong>
+<ul>
+<li><code>Sentiment</code> just one category among many</li>
+<li>Other emotions and categories may be described</li>
+</ul></li>
+<li>Standard SA methods are <strong>lexical</strong>
+<ul>
+<li>The General Inquirer is the prototype</li>
+<li>Dictionaries of terms glossed as having sentiment</li>
+</ul></li>
+<li>Typical sentiment <strong>measures</strong>:
+<ul>
+<li><em>Polarity</em>: -1 or 1</li>
+<li><em>Valence</em>: float between positive and negative endpoints</li>
+</ul></li>
+<li><strong>Advanced</strong> SA tools work at <strong>sentence level</strong>
+<ul>
+<li>Considers grammar, POS, preceding ngrams, punctuation</li>
+<li><a href="https://nlp.stanford.edu/sentiment/index.html">Stanford’s SA tool</a> uses a recursive neural network that uses grammatical structures</li>
+</ul></li>
+</ul>
+</section>
+<section id="definitive-text" class="slide level1 no-title">
+<h1>Definitive Text</h1>
+<div class="column float-left">
+<figure>
+<img data-src="https://www.cs.uic.edu/~liub/FBS/Opinion-Mining.jpg" alt="Bing Liu 2012" /><figcaption>Bing Liu 2012</figcaption>
+</figure>
+</div>
+<div class="column align-left">
+<ul>
+<li>Comprehensive introduction and survey of field</li>
+<li>Access at <a href="http://www.cs.uic.edu/~liub/FBS/SentimentAnalysis-and-OpinionMining.html">home page</a></li>
+<li>Download <a href="http://www.cs.uic.edu/~liub/FBS/SentimentAnalysis-and-OpinionMining.pdf">Free PDF of draft</a></li>
+<li>Download <a href="https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html#lexicon">opinion Lexicons</a></li>
+</ul>
+</div>
+</section>
+<section id="nrc-sentiment-and-emotion-lexicons" class="slide level1">
+<h1>NRC Sentiment and Emotion Lexicons</h1>
+<ul>
+<li>Created by experts at the National Research Council of Canada
+<ul>
+<li>Can be used in sentiment analysis, product marketing, consumer behavior, political campaign analysis, etc.</li>
+<li>In addition to words <strong>includes hashtags, emoticons and word-colour associations</strong></li>
+<li>English, but includes <strong>translations</strong> into 105 other languages, including French, Arabic, Chinese, and Spanish</li>
+</ul></li>
+<li>Includes <strong>sentiment and emotion</strong>
+<ul>
+<li>See next slide</li>
+</ul></li>
+<li>Download <a href="http://sentiment.nrc.ca/lexicons-for-research/">lexicons</a></li>
+</ul>
+</section>
+<section id="sentiment-and-emotion" class="slide level1">
+<h1>Sentiment and Emotion</h1>
+<ul>
+<li>Sentiment and emotion are related but different concepts</li>
+<li><strong>Sentiment</strong> refers to a <strong>general</strong> positive or negative attitude toward something
+<ul>
+<li>Attraction or repulsion</li>
+</ul></li>
+<li><strong>Emotion</strong> refers to the presence of <strong>specific</strong> emotions
+<ul>
+<li>Joy, Fear, etc.</li>
+</ul></li>
+</ul>
+<figure>
+<img data-src="images/nrc-emotions.png" alt="NRC emotions" /><figcaption>NRC emotions</figcaption>
+</figure>
+</section>
+<section id="narrative" class="slide level1">
+<h1>Narrative</h1>
+<ul>
+<li>Today we look at the application of SA to <strong>the study of narrative</strong>
+<ul>
+<li>We have already seen a version of this in McClure’s mental maps</li>
+</ul></li>
+<li>An essential feature of some texts is their <strong>narrative quality</strong>
+<ul>
+<li>Narrative is <strong>a reduced representation of human behavior</strong>, aka social action or life</li>
+</ul></li>
+<li>Every novel is <strong>a theory of human behavior</strong>
+<ul>
+<li>Narratives express that theory using fictional characters</li>
+<li>But the logic of their behavior, and the description of how life unfolds, these are expressions of an author’s worldview</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-study-of-narrative" class="slide level1 no-title">
+<h1>The Study of Narrative</h1>
+<div class="column float-left">
+<ul>
+<li>Aristotle’s <em>Poetics</em> presents <strong>a theory of tragedy</strong> (drama)</li>
+<li>A key concept is the idea of <strong>action</strong> or plot</li>
+<li>This is the unfolding of events in a story or play, considered the <strong>soul</strong> of a story or play</li>
+</ul>
+</div>
+<div class="column">
+<p><img data-src="images/triangle-diagrm-800-x-400-2-halved.jpg" /></p>
+</div>
+</section>
+<section id="dramatic-action" class="slide level1 no-title">
+<h1>Dramatic Action</h1>
+<p><img data-src="images/Aristotle&#39;s_Tragic_Plot_Structure.pdf.jpg" /></p>
+</section>
+<section id="vonnegut" class="slide level1">
+<h1>Vonnegut</h1>
+<ul>
+<li>The American writier Kurt Vonnegut argued that <strong>stories have shapes</strong> which can be “drawn on graph paper”
+<ul>
+<li>Similar to Aristotle, but comparative: the shape of a society’s stories is “at least as interesting as the shape of its pots or spearheads”</li>
+<li>Vonnegut studied anthropology</li>
+</ul></li>
+<li>See <a href="https://youtu.be/oP3c1h8v2ZQ">video</a></li>
+</ul>
+</section>
+<section id="four-shapes" class="slide level1 center">
+<h1>Four Shapes</h1>
+<p><img data-src="images/header_vonnegut-story.jpg" /></p>
+<p>X = time, Y = fortune</p>
+</section>
+<section id="fortune" class="slide level1 assertion">
+<h1>Fortune</h1>
+<p>A key idea that can be overlooked is that both Aristotle and Vonnegut underline the relationship between narrative and <strong>destiny</strong></p>
+<p>Destiny is a central concept in the study of culture</p>
+<p>Different cultures have different ideas about it</p>
+<p><em>luck, fate, destiny, providence, doom, history, evolution, randomness</em></p>
+</section>
+<section id="matt-jockers" class="slide level1">
+<h1>Matt Jockers</h1>
+<ul>
+<li><strong>Matt Jockers</strong> Developed a software package and method for studying narrative computationally called <strong>Syuzhet</strong>
+<ul>
+<li>Written in R and available <a href="https://github.com/mjockers/syuzhet">here</a></li>
+<li>Matt is Professor of English and Data Analytics at Washington State University (formerly at Stanford and Nebraska)</li>
+</ul></li>
+<li>Applies sentiment analysis to the study of narrative
+<ul>
+<li>Based on idea that <strong>fluctuations in sentiment are proxies for fluctuations in plot movement</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="syuzhet" class="slide level1 no-title">
+<h1>Syuzhet</h1>
+<ul>
+<li><strong>Syuzhet</strong> comes from the Russian Formalists Victor <strong>Shklovsky</strong> and Vladimir <strong>Propp</strong>
+<ul>
+<li>Propp famous for theory of the <strong>folktale</strong> as <strong>sequence of functions</strong></li>
+</ul></li>
+<li>They argued that narrative has two parts: “fabula” and the “syuzhet”
+<ul>
+<li><strong>Fabula</strong>: The elements of a story, including actual chronological order</li>
+<li><strong>Syuzhet</strong> The manner in which the elements of the story (fabula) are organized or “told”</li>
+</ul></li>
+<li>Syuzhet sometimes called <strong>plot order</strong></li>
+</ul>
+</section>
+<section id="memento" class="slide level1 no-title">
+<h1>Memento</h1>
+<p><img data-src="images/Memento_Timeline.png" /></p>
+</section>
+<section id="plots-by-sentiment" class="slide level1 assertion">
+<h1>Plots by Sentiment</h1>
+<p>The basic idea is show the distribution of <strong>sentiment markers</strong> over <strong>narrative time</strong></p>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2014/06/poa1-1024x391.png" /></p>
+</section>
+<section id="annotated-portrait" class="slide level1 no-title">
+<h1>Annotated <em>Portrait</em></h1>
+<p><img src="http://www.matthewjockers.net/wp-content/uploads/2014/06/poa2-1024x734.png" height="600"></p>
+</section>
+<section id="the-picture-of-dorian-gray-wilde" class="slide level1 center">
+<h1>The Picture of Dorian Gray (Wilde)</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2014/06/dorian1-1024x402.png" /></p>
+<blockquote>
+<p>Dorian’s life takes a dark turn as the reality of the portrait becomes apparent.</p>
+</blockquote>
+</section>
+<section id="the-da-vinci-code-brown" class="slide level1 center">
+<h1>The Da Vinci Code (Brown)</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2014/06/brown1-1024x397.png" /></p>
+<blockquote>
+<p>Dan Brown never lets the plot become too troubled or too much of a downer. He baits us and teases us with fluctuating emotion.</p>
+</blockquote>
+</section>
+<section id="blood-meridian-mccarthy" class="slide level1 center">
+<h1>Blood Meridian (McCarthy)</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2014/06/mccarthy1-1024x400.png" /></p>
+<blockquote>
+<p>Blood Meridian is a dark book and the more generalized blue trend line lingers in the realms of negative emotion throughout the text; it is a very different book from The Da Vinci Code.</p>
+</blockquote>
+</section>
+<section id="hypothesis-and-questions" class="slide level1">
+<h1>Hypothesis and Questions</h1>
+<ol type="1">
+<li>Gvien that fluctuations in sentiment are a proxy for fluctuations in plot movement</li>
+<li>And that there are a <strong>finite number of plots</strong>
+<ul>
+<li>Estimates range from 3 to 36</li>
+<li>See Booker 2004, Foster-Harris 1959, Tobias 1993, and <a href="https://en.wikipedia.org/wiki/The_Thirty-Six_Dramatic_Situations">Polti 1916</a>.</li>
+</ul></li>
+<li><strong>How many</strong> plots are there?</li>
+<li>Can we develop a <strong>typology</strong> of plots?</li>
+</ol>
+</section>
+<section id="approach" class="slide level1 assertion">
+<h1>Approach</h1>
+<p>Generate plots for <a href="http://www.matthewjockers.net/2013/02/20/unfolding-the-novel/"><strong>a corpus of 41,383 novels</strong></a></p>
+<p><strong>Normalize plots</strong> so that they can be compared</p>
+<p>Call these normalized plots <strong>foundation shapes</strong></p>
+</section>
+<section id="method" class="slide level1 assertion">
+<h1>Method</h1>
+<p>So, to pursue these questions, we need a way to normalize the plots of many novels</p>
+<p><img src="http://www.matthewjockers.net/wp-content/uploads/2015/02/noisy-1024x731.png" width="400" style="float:left;"/> <img src="http://www.matthewjockers.net/wp-content/uploads/2015/02/poa-1024x731.png" width="400"></p>
+</section>
+<section id="the-problem-of-text-length" class="slide level1">
+<h1>The Problem of Text Length</h1>
+<ul>
+<li>A <strong>problem</strong> immediately arises:
+<ul>
+<li>How to compare <strong>texts of different lengths</strong>?</li>
+</ul></li>
+<li>If we follow <strong>Colby’s method</strong> of dividing each story by the same number of units (but for, say, 100 chunks), <strong>some chunks will be larger</strong>
+<ul>
+<li>The larger the chunk, the more chance for <strong>wash-out</strong></li>
+<li>We know that books as a whole tend to have a <strong>mean valence close to zero</strong> on a scale of -1 to 1</li>
+</ul></li>
+<li>A solution
+<ul>
+<li>Use <strong>Fourier transforms</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="fourier-transforms" class="slide level1">
+<h1>Fourier Transforms</h1>
+<ul>
+<li>Fourier transforms are method from <strong>signal processing</strong> that decomposes signals in component wave forms
+<ul>
+<li>We say that the <strong>time domain</strong> is transformed into the <strong>frequency domain</strong></li>
+</ul></li>
+<li>Once transformed, you can <strong>remove unwanted waves</strong> in the frequency domain and then reconstitute a <strong>cleaner signal</strong> in the time domain</li>
+<li>This provides a way of transforming the sentiment-based plot trajectories into a form <strong>independent of story length</strong>
+<ul>
+<li>We can move from plot domain to sentiment-signal frequency domain back to plot domain</li>
+</ul></li>
+</ul>
+</section>
+<section id="fourier-transform-image" class="slide level1 no-title">
+<h1>Fourier Transform Image</h1>
+<p><img data-src="images/Fourier_3D.png" /></p>
+</section>
+<section id="low-pass-filter" class="slide level1">
+<h1>Low Pass Filter</h1>
+<ul>
+<li>A <strong>low-pass filter</strong> is be used to remove the background “hiss” in an audio recording
+<ul>
+<li>A similar approach can be used to filter out the extremes in the sentiment trajectories</li>
+</ul></li>
+<li>Syuzhet computes <strong>foundation shapes</strong> by <strong>discarding all but the lowest terms of the Fourier transform</strong></li>
+</ul>
+</section>
+<section id="foundation-shapes" class="slide level1 center">
+<h1>Foundation Shapes</h1>
+<p><img src="http://www.matthewjockers.net/wp-content/uploads/2015/02/foundation-1024x731.png" width="450"  style="float:left;" /></p>
+<p><img src="http://www.matthewjockers.net/wp-content/uploads/2015/02/wilde-1024x731.png" width="450" /></p>
+</section>
+<section id="process" class="slide level1">
+<h1>Process</h1>
+<ol type="1">
+<li><strong>Generate plot shapes</strong> for all books in the corpus</li>
+<li>Build a <strong>similarity matrix</strong> over all the novels (using Euclidean distance)</li>
+<li><strong>Cluster</strong> books by Hierarchical Agglomerative Clustering (Ward?)</li>
+<li>Try out various methods of cluster identification (<a href="http://en.wikipedia.org/wiki/Silhouette_(clustering)">silhouette</a>, <a href="http://web.stanford.edu/~hastie/Papers/gap.pdf">gap statistic</a>, <a href="http://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set#The_Elbow_Method">elbow</a>) and develop ad-hoc <strong>cluster identification algorithm</strong>.</li>
+<li><strong>Observe</strong> that there are six, or maybe seven, fundamental plot shapes.</li>
+</ol>
+</section>
+<section id="all-the-plots" class="slide level1 no-title">
+<h1>All the Plots</h1>
+<figure>
+<img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/02/1_1_plots.png" alt="The Super Average Plot" /><figcaption>The Super Average Plot</figcaption>
+</figure>
+</section>
+<section id="results" class="slide level1 no-title">
+<h1>Results</h1>
+<figure>
+<img data-src="/Users/rca2t/Dropbox/Courses/DSI/DS5559/UVA_DSI_REPO/lessons/images/dendrogram.png" alt="Resulting dendogram showing six major clusters" /><figcaption>Resulting dendogram showing six major clusters</figcaption>
+</figure>
+</section>
+<section id="two-major-types" class="slide level1 no-title">
+<h1>Two Major Types</h1>
+<figure>
+<img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/02/two_plots.png" alt="The two major foundation shapes" /><figcaption>The two major foundation shapes</figcaption>
+</figure>
+</section>
+<section id="subtypes-1" class="slide level1 no-title">
+<h1>Subtypes 1</h1>
+<p>Subtypes of man in hole<br />
+<img src="http://www.matthewjockers.net/wp-content/uploads/2015/02/mih_1_2.png" height="600" /></p>
+</section>
+<section id="subtypes-2" class="slide level1 no-title">
+<h1>Subtypes 2</h1>
+<p>Subtypes of man on hill<br />
+<img  src="http://www.matthewjockers.net/wp-content/uploads/2015/02/moh_1_2.png" height="600" /></p>
+</section>
+<section id="beyond-four-where-to-cut" class="slide level1">
+<h1>Beyond four, where to cut?</h1>
+<ul>
+<li>Iterate through a series of possible cut points
+<ul>
+<li>For each, take two measures:
+<ul>
+<li><strong>cluster homogeneity</strong></li>
+<li><strong>cluster dissimilarity</strong></li>
+</ul></li>
+<li>compare to objective</li>
+</ul></li>
+<li>Also apply intuition :-)</li>
+</ul>
+</section>
+<section id="choose-6" class="slide level1 no-title">
+<h1>Choose 6</h1>
+<p>Choose 6 – MIH I and MOH II split (but note lower right)<br />
+<img  src="http://www.matthewjockers.net/wp-content/uploads/2015/02/level_six.png" height="600"  /></p>
+</section>
+<section id="choose-7" class="slide level1 no-title">
+<h1>Choose 7</h1>
+<p>Choose 7 – MOH II splits<br />
+<img src="http://www.matthewjockers.net/wp-content/uploads/2015/02/seventh.png" height="600" /></p>
+</section>
+<section id="archetypes" class="slide level1 no-title">
+<h1>Archetypes</h1>
+<p><img src="http://www.matthewjockers.net/wp-content/uploads/2015/02/poa-1024x731.png" height="600" /></p>
+</section>
+<section id="archetypes-1" class="slide level1 no-title">
+<h1>Archetypes</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/02/arch_11.png" /></p>
+</section>
+<section id="archetypes-2" class="slide level1 no-title">
+<h1>Archetypes</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/02/arch_2.png" /></p>
+</section>
+<section id="archetypes-3" class="slide level1 no-title">
+<h1>Archetypes</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/02/arch_3.png" /></p>
+</section>
+<section id="archetypes-4" class="slide level1 no-title">
+<h1>Archetypes</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/02/arch_4.png" /></p>
+</section>
+<section id="archetypes-5" class="slide level1 no-title">
+<h1>Archetypes</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/02/arch_61.png" /></p>
+</section>
+<section id="swoffords-criticisms" class="slide level1">
+<h1>Swofford’s Criticisms</h1>
+<ul>
+<li>Sentence parsing
+<ul>
+<li>Not always correct (see Dickens example)</li>
+</ul></li>
+<li>Sentiment attribution
+<ul>
+<li>Usual flaws</li>
+</ul></li>
+<li>Foundation Shapes
+<ul>
+<li><strong>Ringing artifacts</strong> caused by a low-pass filters</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>the foundation shape for the first part of the book is not merely inaccurate, but in fact exactly opposite the actual shape of the original graph.</p>
+</blockquote>
+</section>
+<section id="sentence-parsing" class="slide level1">
+<h1>Sentence Parsing</h1>
+<blockquote>
+<p>Mrs. Rachael, I needn’t inform you who were acquainted with the late Miss Barbary’s affairs, that her means die with her and that this young lady, now her aunt is dead–” “My aunt, sir!” “It is really of no use carrying on a deception when no object is to be gained by it,” said Mr. Kenge smoothly, “Aunt in fact, though not in law.</p>
+</blockquote>
+</section>
+<section id="sentiment-attribution" class="slide level1">
+<h1>Sentiment Attribution</h1>
+<p>Swofford points out the usual problems:</p>
+<ul>
+<li>Can’t process modifiers</li>
+<li>Polysemy</li>
+<li>Contemporary English</li>
+<li>Repetition discounted</li>
+<li>Lack of nuance</li>
+</ul>
+</section>
+<section id="example" class="slide level1">
+<h1>Example</h1>
+<blockquote>
+<p>I haven’t been sad in a long time. I am extremely happy today. It’s a good day. But suddenly I’m only a little bit happy. Then I’m not happy at all. In fact, I am now the least happy person on the planet. There is no happiness left in me. Wait, it’s returned! I don’t feel so bad after all!</p>
+</blockquote>
+<p><img data-src="https://annieswafford.files.wordpress.com/2015/03/sample_paragraph.jpg?w=300&amp;h=300" /></p>
+<p>Common sense would interpret the sentences just the opposite to the graph!</p>
+</section>
+<section id="foundation-shapes-and-ringing-artifacts" class="slide level1">
+<h1>Foundation Shapes and Ringing Artifacts</h1>
+<ul>
+<li>Low-pass filters often introduce <strong>ringing artifacts</strong> – extra humps in the graph that aren’t well-approximated by sinusoids</li>
+<li>These artifacts will be larger when the number of sinusoids is lower</li>
+</ul>
+<p><img src="https://annieswafford.files.wordpress.com/2015/03/original_signal.jpg?w=300&h=300" style="float:left;" /></p>
+<p><img data-src="https://annieswafford.files.wordpress.com/2015/03/low_pass_5.jpg?w=300&amp;h=300" /></p>
+</section>
+<section id="section" class="slide level1">
+<h1></h1>
+<ul>
+<li>By default, Syuzhet uses an even lower cutoff than the example above (keeping only three Fourier terms)</li>
+<li><em>The Portrait of the Artist</em> example shows this</li>
+</ul>
+<p><img src="https://annieswafford.files.wordpress.com/2015/03/noisy.png?w=300&h=214" style="float:left;" /></p>
+<p><img src="https://annieswafford.files.wordpress.com/2015/03/foundation.png?w=300&h=214" /></p>
+<ul>
+<li>Until Syuzhet provides filters that don’t cause ringing artifacts, it is likely that most foundation shapes will be inaccurate representations of the stories’ true plot trajectories</li>
+<li>Gaussian filters do not introduce ringing artifacts, though they have their own limitations</li>
+</ul>
+</section>
+<section id="jockers-response" class="slide level1">
+<h1>Jockers’ Response</h1>
+<ul>
+<li>None of the current sentiment detection methods are especially reliable (!)</li>
+<li>The Stanford tagger (considered best in the open source market) hovers around 80–83% accuracy</li>
+<li>Performance sensitive to genre</li>
+<li>No “correct” sentiment
+<ul>
+<li>Is it close enough?</li>
+</ul></li>
+<li>Sophisticated tools are not necessarily better</li>
+</ul>
+</section>
+<section id="comparison-1" class="slide level1">
+<h1>Comparison 1</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/03/percent_based.png" /></p>
+</section>
+<section id="comparison-2" class="slide level1">
+<h1>Comparison 2</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/03/four_methods.png" /></p>
+</section>
+<section id="response-to-criticism-of-foundation" class="slide level1 assertion">
+<h1>Response to criticism of foundation</h1>
+<p>Regarding the criticism that the foundation is wrong, Jockers’s asserts that it is actually is consistent with <strong>the novel as read</strong></p>
+</section>
+<section id="low-pass-5" class="slide level1">
+<h1>Low Pass = 5</h1>
+<ul>
+<li>Could get more accurate</li>
+</ul>
+<figure>
+<img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/03/low-pass5.png" alt="Portrait with Five Components" /><figcaption>Portrait with Five Components</figcaption>
+</figure>
+</section>
+<section id="remaining-problems" class="slide level1">
+<h1>Remaining problems</h1>
+<ul>
+<li>Irony, satire, dark humor, etc.</li>
+</ul>
+</section>
+<section id="swofford-resonse-2" class="slide level1">
+<h1>Swofford Resonse 2</h1>
+<ul>
+<li>Not arguing about whether or not <em>Portrait of the Artist</em> represents a “man in a hole” plot shape,
+<ul>
+<li>The Syuzhet plot shape can easily be the <strong>result of low-pass filter artifacts</strong> instead of a reflection of the computed sentiment</li>
+<li>Therefore <strong>does not reliably reflect the emotional trajectories of novels</strong></li>
+<li>Can’t trust the foundation shapes!</li>
+</ul></li>
+<li>More important: <strong>Can’t evaluate sentiment analysis as “good enough”</strong> without benchmarks to define success</li>
+<li>She notes that Jockers’ “proof” elides some differences in the methods…</li>
+</ul>
+</section>
+<section id="test-1" class="slide level1">
+<h1>Test 1</h1>
+<ul>
+<li>Remove the emotion from the last third of the novel and see what the transform does</li>
+<li>The result shows that the last hump is a ringing artifact</li>
+</ul>
+<p><img data-src="https://annieswafford.files.wordpress.com/2015/03/portrait_no_last_third1.png?w=470&amp;h=353" /></p>
+<p>In fact, you can just leave the middle twenty sentences (0.5%)!</p>
+</section>
+<section id="test-2" class="slide level1">
+<h1>Test 2</h1>
+<p><img data-src="https://annieswafford.files.wordpress.com/2015/03/portrait_middle_201.png?w=470&amp;h=352" /></p>
+<blockquote>
+<p>Their similar foundation shapes do not validate Syuzhet’s sentiment analysis algorithm; they merely demonstrate that Syuzhet’s foundation shapes can make dissimilar curves similar.</p>
+</blockquote>
+</section>
+<section id="theres-more" class="slide level1">
+<h1>There’s more</h1>
+<p><img data-src="https://annieswafford.files.wordpress.com/2015/03/portrait_wings1.png?w=470&amp;h=352" /></p>
+<ul>
+<li>The new foundation shape (blue) now shows the midpoint of the novel as less negative than the area around it, even though it is still the most negative portion of the story (since we only changed the very beginning and end)</li>
+<li>Classic ringing artifact: the foundation shape can’t reflect the emotional heights at both ends of the story without altering the middle because the correct shape cannot be approximated by low-frequency sinusoids</li>
+</ul>
+</section>
+<section id="lepages-quartet" class="slide level1">
+<h1>Lepage’s Quartet</h1>
+<p><img data-src="https://annieswafford.files.wordpress.com/2015/03/like_portrait1.png?w=600&amp;h=451" /></p>
+</section>
+<section id="one-signal-four-shapes" class="slide level1">
+<h1>One Signal, Four Shapes</h1>
+<blockquote>
+<p>practically all of the variation is determined by the higher Fourier terms. This means that by making nearly-invisible low-frequency changes to the original valence, we can completely alter its foundation shape:</p>
+</blockquote>
+<p><img data-src="https://annieswafford.files.wordpress.com/2015/03/varying_foundations1.png?w=600&amp;h=449" /></p>
+</section>
+<section id="in-sum" class="slide level1 no-title">
+<h1>In Sum</h1>
+<blockquote>
+<p>All in all, Syuzhet’s lack of benchmarks and inaccurate foundation shapes are cause for concern. It has a long way to go before we can make reliable claims about the number of archetypal plot shapes novels share.</p>
+</blockquote>
+</section>
+<section id="jockers-response-1" class="slide level1">
+<h1>Jockers’ Response</h1>
+<ul>
+<li>Information loss OK [But it’s the accumulation of error that matters]</li>
+<li>Implemented a Gaussian filter, but still unconvinced
+<ul>
+<li>Remember – trying to solve the problem of length</li>
+</ul></li>
+<li>There are no books with zero neutral values for an entire third</li>
+<li>The exercise has more to do with the setting of a particular user parameter than it does with the package.</li>
+<li>Open to the possibility that there is some <strong>confirmation bias possible</strong></li>
+</ul>
+</section>
+<section id="playing-with-the-parameter" class="slide level1">
+<h1>Playing with the Parameter</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/03/low-pass_100.png" /></p>
+</section>
+<section id="playing-with-the-parameter-1" class="slide level1">
+<h1>Playing with the Parameter</h1>
+<p><img data-src="http://www.matthewjockers.net/wp-content/uploads/2015/03/low_pass_20.png" /></p>
+<p>Still MIH . . .</p>
+</section>
+<section id="enderle" class="slide level1">
+<h1>Enderle</h1>
+<ul>
+<li>Jockers suggests that ringing artifacts are what we want</li>
+<li>Do we want this kind of distortion?</li>
+<li>“My issue with using Fourier transforms to represent sentiment time series data is that we have no clear theoretical justification to do so. We have no theoretical reason to want the kind of distortion it produces.”</li>
+<li>[Pace Underwoord] “we should do our best to ensure that the mathematical models we use have clear and concrete interpretations in terms of the physical processes that we study and seek to understand: : reading, writing, textual distribution, influence, and so on. This is what Syuzhet fails to do at the smoothing and filtering stage right now.”</li>
+</ul>
+</section>
+<section id="whats-wrong-with-fourier" class="slide level1">
+<h1>What’s Wrong with Fourier</h1>
+<ul>
+<li>A Fourier transform models time series data as a weighted sum of sine waves of different frequencies.</li>
+<li>Why should sentiments be described this way?</li>
+<li>Compare to the Dirichlet prior in LDA – It’s a set of N distinct real-valued variables that always sum to one.</li>
+</ul>
+</section>
+<section id="underwood" class="slide level1">
+<h1>Underwood</h1>
+<ul>
+<li>I’m unsure how anyone <em>could</em> be right or wrong here, because as far as I can tell there’s no thesis under discussion yet.</li>
+<li>The same thing goes for the concepts of “plot” and “emotional valence.”</li>
+<li>We need a question we’re trying to solve.</li>
+</ul>
+</section>
+<section id="schmidt" class="slide level1">
+<h1>Schmidt</h1>
+<ul>
+<li><p>Fourier transforms are the wrong “smoothing function” (insofar as that is the appropriate term to use) to choose for plots, because they assume plot arcs are periodic functions in which the beginning must align with the end.</p></li>
+<li><p>this cyclicality means that syuzhet imposes an assumption that the start of plot lines up with the end of a plot.</p></li>
+</ul>
+</section>
+<section id="schmidt-1" class="slide level1">
+<h1>Schmidt</h1>
+<p><img src="http://benschmidt.org/wp/wp-content/uploads/2015/04/Screen-Shot-2015-04-03-at-11.52.25-AM.png" width="450" style="float:left;"/></p>
+<p><img src="http://benschmidt.org/wp/wp-content/uploads/2015/04/Screen-Shot-2015-04-03-at-11.47.38-AM.png" width="450" /></p>
+<blockquote>
+<p>this should convince Jockers to retire the waveform assumptions in favor of something like Loess smoothing or moving averages</p>
+</blockquote>
+</section>
+<section id="requiem" class="slide level1">
+<h1>Requiem</h1>
+<ul>
+<li>Agrees with Schmidt re the edges</li>
+<li>But endpoints are problematic in most smoothers and filters</li>
+<li>With a simple rolling window, for example, the averaging can’t start until we are already half the distance of the window into the sequence.</li>
+</ul>
+</section>
+<section id="conclusion" class="slide level1 assertion">
+<h1>Conclusion</h1>
+<p>We need a theory of plot</p>
+<p>Are sentiments signals?</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://revealjs.com/lib/js/head.min.js"></script>
+  <script src="https://revealjs.com/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://revealjs.com/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://revealjs.com/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://revealjs.com/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

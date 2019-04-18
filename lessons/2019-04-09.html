@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Raf Alvarado">
+  <meta name="dcterms.date" content="2019-04-09">
+  <title>Sentiment Analysis 1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://revealjs.com/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="https://revealjs.com/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="default-pandoc-slides.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://revealjs.com/css/print/pdf.css' : 'https://revealjs.com/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://revealjs.com/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Sentiment Analysis 1</h1>
+  <p class="subtitle">UVA DS 5559</p>
+  <p class="author">Raf Alvarado</p>
+  <p class="date">09 April 2019</p>
+</section>
+
+<section id="national-champions" class="slide level1 no-title">
+<h1>National Champions</h1>
+<div class="center">
+<figure>
+<img data-src="images/uva-national-champions.jpg" alt="WAHOO WAH!" /><figcaption>WAHOO WAH!</figcaption>
+</figure>
+</div>
+</section>
+<section id="review" class="slide level1">
+<h1>Review</h1>
+<ul>
+<li>Word embeddings allow us to explore <strong>meanings that exist independently of documents</strong>
+<ul>
+<li>Documents are a <strong>means to an end</strong></li>
+<li>WEs represent <strong>collective representations</strong></li>
+</ul></li>
+<li>You can <strong>generate your own</strong> semantic models or <strong>incorporate pre-trained models</strong>
+<ul>
+<li>Like topic models, they use documents to generate representations that transcend documents</li>
+<li>Pre-trained models <strong>should align</strong> with your corpus</li>
+</ul></li>
+<li>There are many ways to generate WEs
+<ul>
+<li>In principle, the logic <strong>applies to other things</strong>, e.g. proteins, social groups</li>
+</ul></li>
+</ul>
+</section>
+<section id="overview" class="slide level1">
+<h1>Overview</h1>
+<ul>
+<li>So far, we have been focused on <strong>cognitive content</strong>
+<ul>
+<li>Mental maps, topics, word meanings</li>
+</ul></li>
+<li>But <span class="math inline"><em>C</em><em>u</em><em>l</em><em>t</em><em>u</em><em>r</em><em>e</em> = <em>E</em><em>t</em><em>h</em><em>o</em><em>s</em> + <em>W</em><em>o</em><em>r</em><em>l</em><em>d</em><em>v</em><em>i</em><em>e</em><em>w</em></span>
+<ul>
+<li><strong>Worldview</strong>: categories, theories, “world hypotheses”</li>
+<li><strong>Ethos</strong>: values, norms, sentiments (<em>toward</em> things)</li>
+<li>The two are closely related and hard to disentangle</li>
+</ul></li>
+<li>The branch of text analytics concerned with <em>ethos</em> is Sentiment Analysis (SA)</li>
+</ul>
+</section>
+<section id="ethos-and-worldview" class="slide level1 no-title">
+<h1>Ethos and Worldview</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><br/><br/><br/> <span style="text-align:left;">Dante’s <em>Divine Comedy</em> describes a worldview that is also and ethical system</span></p>
+</div><div class="column" style="width:60%;">
+<p><img src="images/inferno-diagram.gif" height="600"/></p>
+</div>
+</div>
+</section>
+<section id="overview-1" class="slide level1 assertion">
+<h1>Overview</h1>
+<p>Also, instead of a <strong>class of technical methods</strong>, SA refers to a <strong>general problem domain</strong> with many approaches</p>
+<p>SA usually has specific empirical goals in mind</p>
+</section>
+<section id="what-is-sentiment-analysis" class="slide level1">
+<h1>What is Sentiment Analysis?</h1>
+<ul>
+<li>SA is a branch of text analytics concerned with <strong>inferring evaluative content</strong> from textual data
+<ul>
+<li>“Sentiment” is a cover term for <strong>values, opinions, emotions, attitudes</strong>, etc. (elements of <em>ethos</em>)</li>
+<li>In general, the <strong>positive or negative orientation of people toward things</strong></li>
+</ul></li>
+<li>Need not be binomial (like/dislike)
+<ul>
+<li>Some SA methods look for intensities of <strong>different emotions</strong><br />
+</li>
+</ul></li>
+<li>Part of a broader and much older branch of TA called <strong>content analysis</strong>
+<ul>
+<li>Related also to <strong>Qualitative Data Analysis</strong> and <strong>semantic markup</strong></li>
+<li>Same principle: identify words that signify something</li>
+</ul></li>
+<li>A pervasive and essential tool
+<ul>
+<li>BTW, <strong>Facebook’s “like” feature</strong> is essentially a way to for people to label content by sentiment</li>
+</ul></li>
+</ul>
+</section>
+<section id="uses-of-sa" class="slide level1">
+<h1>Uses of SA</h1>
+<ul>
+<li><strong>Brand sentiment</strong> for marketing (or anything else)
+<ul>
+<li>Do people like our product? Our candidate?</li>
+</ul></li>
+<li><strong>Population mood</strong> or tone
+<ul>
+<li>National consciousness (Mishne and Glance 2006)</li>
+<li>Stock market (Bollen, et al., 2011)</li>
+<li>Geography of happiness (Mitchell, et al., 2013)</li>
+</ul></li>
+<li><strong>Opinion mining</strong>
+<ul>
+<li>Some argue it is better than polling</li>
+</ul></li>
+<li><strong>Narrative patterns</strong>
+<ul>
+<li>Sentiment patterns within texts</li>
+</ul></li>
+</ul>
+</section>
+<section id="sentiment-as-signal" class="slide level1 center">
+<h1>Sentiment as Signal</h1>
+<figure>
+<img data-src="images/sentiment-egypt.jpg" alt="Tone of coverage mentioning “Egypt” Summary of World Broadcasts January 1979—March 2011" /><figcaption>Tone of coverage mentioning “Egypt”<br/>Summary of World Broadcasts<br/>January 1979—March 2011</figcaption>
+</figure>
+<p><a href="https://firstmonday.org/article/view/3663/3040">Leetaru 2011</a></p>
+</section>
+<section id="sentiment-as-signal-ii" class="slide level1 center no-title">
+<h1>Sentiment as Signal (ii)</h1>
+<div class="columns">
+<figure>
+<img data-src="images/n-twitter-sentiment-map.png" alt="Map of tweets collected from New York City during the calendar year 2011 Points = individuals; color = average word happiness of nearby tweets (red is happier, blue is sadder)" /><figcaption>Map of tweets collected from New York City during the calendar year 2011<br/>Points = individuals; color = average word happiness of nearby tweets (red is happier, blue is sadder)</figcaption>
+</figure><p><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064417">Mitchell, Frank, et al., 2014</a></p>
+</div>
+</section>
+<section id="text-as-sensor" class="slide level1 assertion">
+<h1>Text as Sensor</h1>
+<p>Texts are like <strong>sensors</strong></p>
+<p>They are <strong>transducers</strong> of cultural and social information</p>
+</section>
+<section id="methods-of-sa" class="slide level1">
+<h1>Methods of SA</h1>
+<ul>
+<li>Lexicon-based
+<ul>
+<li><strong>General Inquirer</strong></li>
+<li>LIWC (“Luke”) – Linguistic Inquiry and Word Count</li>
+<li>NRC Word-Emotion Association Lexicon (aka EmoLex)</li>
+</ul></li>
+<li>ML-based approaches
+<ul>
+<li>Supervised, Unsupervised, Semi-supervised (Naive Bayes, Maximum Entropy, Support Vector Machines, etc.)</li>
+</ul></li>
+<li>Rules-based
+<ul>
+<li><strong>VADER</strong>: <strong>V</strong>alence <strong>A</strong>ware <strong>D</strong>ictionary for s<strong>E</strong>ntiment <strong>R</strong>easoning</li>
+</ul></li>
+<li>Enhanced Lexicon
+<ul>
+<li>Hu and Liu, Ensemble Classification</li>
+</ul></li>
+</ul>
+</section>
+<section id="lexicon" class="slide level1 assertion">
+<h1>Lexicon</h1>
+<p>A lexicon is <strong>a kind of dictionary</strong> in which words are <strong>glossed</strong> as features</p>
+<p>Features may include <strong>ontological categories</strong> and <strong>numeric properties</strong></p>
+<p>In our data model, a lexicon is an extension of the <strong>vocabulary table</strong> and an ontology might be added as <strong>another table</strong></p>
+<p>Lexicons are usually <strong>human-generated</strong></p>
+</section>
+<section id="sentiment-lexicons" class="slide level1">
+<h1>Sentiment Lexicons</h1>
+<ul>
+<li><strong>Polarity-based</strong>
+<ul>
+<li>LIWC, General Inquirer (GI)
+<ul>
+<li>Typically, these lexicons cover more than sentiment</li>
+<li>SA uses two categories (positive/negative) from larger lexicon</li>
+</ul></li>
+<li>They assign positive or negative value based on context free meanings (“semantic orientation”)</li>
+</ul></li>
+<li><strong>Valence-based</strong>
+<ul>
+<li>ANEW, SentiWordNet, SenticNet</li>
+<li>Assign a valence, or magnitude</li>
+</ul></li>
+</ul>
+</section>
+<section id="general-method" class="slide level1">
+<h1>General Method</h1>
+<ul>
+<li>Get a <strong>BOW model</strong> of a corpus</li>
+<li><strong>Tag words</strong> that match terms in the lexicon
+<ul>
+<li>Can be done with an inner join between tokens and vocabulary</li>
+<li>Words inherit the polarity and intensity from the lexical entry</li>
+</ul></li>
+<li><strong>Score each document</strong> by some function
+<ul>
+<li>majority voting, averaging, thresholding, counting</li>
+</ul></li>
+<li>Enhanced methods include more features and heuristics</li>
+</ul>
+</section>
+<section id="the-general-inquirer-gi" class="slide level1">
+<h1>The General Inquirer (GI)</h1>
+<ul>
+<li>The General Inquirer System is one of the oldest SA tools
+<ul>
+<li>Developed at <strong>Harvard</strong> University in <strong>1961</strong> by Philip J. Stone, Robert F. Bales, et al.</li>
+</ul></li>
+<li>Developed for <strong>content analysis</strong> research problems in the <strong>behavioral sciences</strong>
+<ul>
+<li>In 1962 it merged with the <strong>Hunt Concept Learner</strong> to produce a method for <strong>automatic theme analysis</strong></li>
+<li>Research was intended to discover how humans learn to classify things</li>
+</ul></li>
+<li>Even though crude by today’s standards, it demonstrates the <strong>fundamental design principles</strong> of sentiment analysis
+<ul>
+<li>And it’s still around – see <a href="http://www.wjh.harvard.edu/~inquirer/">GI homepage</a></li>
+</ul></li>
+<li>See https://www.joe.org/joe/2001december/tt1.php</li>
+</ul>
+</section>
+<section id="gi-book" class="slide level1 no-title">
+<h1>GI Book</h1>
+<figure>
+<img data-src="images/gi-book.jpg" alt="Stone, Dunphy, Smith, and Ogilvie 1966" /><figcaption>Stone, Dunphy, Smith, and Ogilvie 1966</figcaption>
+</figure>
+<p><span style="font-size:90%;">On sale at Amazon for <code>$1,497.32</code></span></p>
+</section>
+<section id="the-ibm-7090" class="slide level1 no-title">
+<h1>The IBM 7090</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Developed using what was then a the state-fo-the-art <strong>IBM 7090</strong>
+<ul>
+<li>One of IBM’s first transistor-based (solid state) computers</li>
+</ul></li>
+<li>Designed for NASA’s Mercury and Gemini space missions
+<ul>
+<li>The computer in <em>Hidden Figures</em> that <strong>Dorothy Vaughn</strong>, supervisor of human computers, learned to use.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<figure>
+<img data-src="images/ibm.7090.jpg" alt="The sleek IBM 7090" /><figcaption>The sleek IBM 7090</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="dorothy-vaughan" class="slide level1 no-title center">
+<h1>Dorothy Vaughan</h1>
+<div class="column" height="700px">
+<figure>
+<img data-src="images/dorothy-vaughan.jpg" alt="Dorothy Vaughan" /><figcaption>Dorothy Vaughan</figcaption>
+</figure>
+</div>
+</section>
+<section id="colbys-research" class="slide level1">
+<h1>Colby’s Research</h1>
+<ul>
+<li>The cultural anthropologist <strong>Benjamin Colby</strong> applied the GI system to <strong>folklore</strong>
+<ul>
+<li>Anthropologists often study <strong>myths</strong></li>
+<li>Folklore is a variant of myth (so-called “fairy tales”)</li>
+</ul></li>
+<li>Goals is to observe and <strong>represent thematic content</strong>
+<ul>
+<li>“Clusters of such themes provide insight into the way cultures conceptually organize the world around them.”</li>
+</ul></li>
+<li>Does a <strong>comparative study</strong> of five cultures
+<ul>
+<li>Kwaikiutl, Egypt, Eskimo, Hindu India, and China</li>
+</ul></li>
+</ul>
+</section>
+<section id="colby-quote" class="slide level1 no-title">
+<h1>Colby Quote</h1>
+<blockquote>
+<p>“Only very recently has it become possible, through the use of computers, to process large numbers of narrative texts having many variables in order to discover statistically significant patterns which are culturally distinctive and amenable to testing in the field.”</p>
+<p>Colby 1966: 793</p>
+</blockquote>
+</section>
+<section id="gi-data-model" class="slide level1">
+<h1>GI Data Model</h1>
+<ul>
+<li>A <strong>dictionary</strong> containing:
+<ul>
+<li>A. <strong>High frequency</strong> words of <strong>low information</strong> content (i.e. stopwords)</li>
+<li>B. <strong>Medium frequency</strong> words with <strong>multiple meanings</strong> and are therefore ambiguous out of context (e.g., ‘content’ ‘general’)</li>
+<li>C. <strong>Words with single predominating meanings</strong></li>
+</ul></li>
+<li>A corpus of <strong>texts</strong> containing:
+<ul>
+<li>Folktakes with 9000 words per cultural sample</li>
+<li>Dictionary groups A and B removed</li>
+</ul></li>
+<li>An <strong>lexicon</strong> of words mapped onto <strong>themes</strong>
+<ul>
+<li>Based on existing work, e.g. Harvard’s IV-4 dictionary and the <a href="http://www.wjh.harvard.edu/~inquirer/lasswell.htm">Lasswell Value Dictionary</a></li>
+<li><strong>180 themes</strong> used to classify type C words</li>
+<li><strong>8 Groups</strong>: <em>Value categories, perception and communication, space and time, self-identity, nature, sex and kinship, activities, miscellaneous</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="themes" class="slide level1">
+<h1>Themes</h1>
+<ul>
+<li>In addition to the GI themes, Colby incorporates the anthropologist’s <strong>Clyde Kluckhohn’s monumental study of culture</strong>
+<ul>
+<li>He defined a set of <strong>core oppositions</strong> with which to “score” cultures
+<ul>
+<li>E.g. <code>Self-Other, Good-Evil, Individual-Group, Emotional-Rational, Quality-Quantity</code></li>
+<li>Today, we would call these <strong>ontological</strong></li>
+<li>Kluckhohn’s approach consistent with idea that <strong>cultural systems of classification are built out of oppositions</strong></li>
+</ul></li>
+<li>Colby reduces these to a smaller set of less general, more precises themes
+<ul>
+<li>See samples …</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="use-of-ontologies" class="slide level1 assertion">
+<h1>Use of Ontologies</h1>
+<p>Note that today we use <strong>ontologies to define features</strong> in machine learning</p>
+</section>
+<section id="sample-themes" class="slide level1 no-title">
+<h1>Sample Themes</h1>
+<p><img data-src="images/gi-sample-themes.png" /></p>
+</section>
+<section id="gi-algorithm" class="slide level1">
+<h1>GI Algorithm</h1>
+<ul>
+<li>After removing stopwords and polyemous words, each word in each cultural sample is <strong>tagged</strong> with its corresponding category in the thesaurus</li>
+<li>The tags are <strong>tallied</strong> into counts for each culture</li>
+<li>Counts are <strong>evaluated</strong> by frequency, clustering, and correlations, both within and between samples</li>
+</ul>
+</section>
+<section id="gi-results" class="slide level1 no-title">
+<h1>GI Results</h1>
+<figure>
+<img data-src="images/gi-results-640.png" alt="GI results" /><figcaption>GI results</figcaption>
+</figure>
+</section>
+<section id="gi-interpretation" class="slide level1">
+<h1>GI Interpretation</h1>
+<ul>
+<li><strong><span class="small-caps">Kwaikiutl and Eskimo</span></strong>
+<ul>
+<li>Both have very high count for categories <strong>Arrive, Go, and Place</strong>, reflecting a concern with travel, exploration, distance, and territory</li>
+<li>Clearly differentiated from the other three cultures in this</li>
+<li>May reflect the similarity in geographical situation</li>
+</ul></li>
+<li><strong><span class="small-caps">Eskimo</span></strong>
+<ul>
+<li>High scores for the themes <strong>Aware, Form, See, Smell, Texture</strong>, etc.</li>
+<li>This cluster of themes connected with <strong>sensory perception</strong></li>
+<li>Relates to ecological adaptation of the Eskimo to a harsh environment</li>
+<li>Also high counts for weather themes suggest importance of ecological adaptation</li>
+</ul></li>
+</ul>
+</section>
+<section id="gi-interpretation-ii" class="slide level1">
+<h1>GI Interpretation (ii)</h1>
+<ul>
+<li><strong><span class="small-caps">Egyptian</span></strong>
+<ul>
+<li>Co-occurrence of high counts for <strong>Dominate, Follow, Ask</strong></li>
+<li>Suggests importance of social participation, submission to power and authority</li>
+<li>High count also given <strong>Independence</strong> may indicate a simultaneous value emphasis upon autonomy and self-sufficiency</li>
+</ul></li>
+<li><strong><span class="small-caps">India and China</span></strong>
+<ul>
+<li>High counts for both <strong>affective and rational themes</strong></li>
+<li>Contradicts preconceived ideas about the complementarity of these themes
+<ul>
+<li>(Americans, at least in the Enlightenment tradition, tend to separate reason and emotion)</li>
+</ul></li>
+<li>Shows the heuristic value of computer work</li>
+</ul></li>
+</ul>
+</section>
+<section id="gi-interpretation-iii" class="slide level1">
+<h1>GI Interpretation (iii)</h1>
+<ul>
+<li>The themes <strong>Boundary, Form, Time, and Hunt</strong> form a <strong>covariant cluster</strong>
+<ul>
+<li>If a culture’s tales strongly emphasize one of the member themes, they will also strongly emphasize the others
+<ul>
+<li>Conversely, weak emphasis of one theme is accompanied by weak emphasis of the others</li>
+</ul></li>
+<li>Colby speculates that these themes may have a <strong>“cognitive interrelationship which transcends cultural differences.”</strong>
+<ul>
+<li>i.e. They may consitute a <strong>cultural universal</strong></li>
+</ul></li>
+</ul></li>
+<li>These results show that the method can discovery <strong>contrasts that differentiate and characterize cultures</strong></li>
+</ul>
+</section>
+<section id="observations" class="slide level1 assertion">
+<h1>Observations</h1>
+<ul>
+<li>These kinds of observations seem relevant to the interpretation of words in <strong>our PCA example</strong>
+<ul>
+<li>The component <strong>loadings</strong> might be mapped onto <strong>ontological categories</strong> like this</li>
+</ul></li>
+<li>These theme clusters also <strong>look a lot like topics</strong> surfaced by LDA</li>
+</ul>
+</section>
+<section id="some-criticisms" class="slide level1">
+<h1>Some Criticisms</h1>
+<ul>
+<li><strong>Translatability</strong> of Class C words. Counter examples:
+<ul>
+<li>Japan: <em>on</em></li>
+<li>Brazil: <em>saudade</em></li>
+<li>Netherlands: <em>gezellig</em></li>
+</ul></li>
+<li>Removal of <strong>polyemous</strong> terms loses a lot of cultural information</li>
+<li><strong>Sample bias</strong>
+<ul>
+<li>Only 9000 words per “culture”!</li>
+</ul></li>
+<li><strong>Definition of culture</strong> is notoriously slippery
+<ul>
+<li>Does India or China have a single culture?</li>
+</ul></li>
+</ul>
+</section>
+<section id="culture-patterns-in-narrative" class="slide level1">
+<h1>Culture Patterns in Narrative</h1>
+<ul>
+<li>Colby extends his research by <strong>mapping ontological terms onto narrative</strong>
+<ul>
+<li>Same analytic duality we have seen — <strong>structure vs. process</strong></li>
+</ul></li>
+<li>Also comes up with <strong>a general model of culture</strong>
+<ul>
+<li>Cultural <strong>templates</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="culture-pattens-theory" class="slide level1">
+<h1>Culture Pattens Theory</h1>
+<ul>
+<li>Anthropologists have long held that culture exhibits <strong>patterns</strong> and <strong>configurations</strong></li>
+<li>Example configurations: <strong>Apollonian and Dionysian</strong> (Ruth Benedict)
+<ul>
+<li><em>Apollonian</em>: tradition, prudence, restraint, harmony</li>
+<li><em>Dionysian</em>: danger, power, violence, self-reliance</li>
+<li>Similar to Indo-European <em>Mitra / Varuna</em> (<em>celeritas / gravitas</em>)</li>
+</ul></li>
+<li>Hypothesis: Word counts (i.e. text analytics) indicate <strong>cultural templates</strong> or pattern components</li>
+<li>Each folktale reflects the influence of a such a template system
+<ul>
+<li>i.e. A generative model, whereby templates generate texts</li>
+</ul></li>
+</ul>
+</section>
+<section id="culture-patterns-method" class="slide level1">
+<h1>Culture Patterns Method</h1>
+<ul>
+<li>Divide folktales into 9 units of equal length
+<ul>
+<li>3 = beginning, middle, and end</li>
+</ul></li>
+<li>Stack tales into composite
+<ul>
+<li>i.e. Unit number becomes a label</li>
+</ul></li>
+<li>Focus on <strong>Japanese</strong> and <strong>Eskimo</strong> folktales
+<ul>
+<li>In translation</li>
+</ul></li>
+<li><strong>Tally</strong> thesaurus terms for each unit <strong>across</strong> folktales</li>
+</ul>
+</section>
+<section id="some-observations" class="slide level1">
+<h1>Some Observations</h1>
+<ul>
+<li>When data from both cultures are viewed together, time and place words appear disproprtionately in Part 1
+<ul>
+<li>These are related to the situating function</li>
+</ul></li>
+<li>However, when look at individually, time and space have different distributions</li>
+</ul>
+</section>
+<section id="time" class="slide level1">
+<h1>Time</h1>
+<p><img data-src="images/colby-1966-fig-2.png" /></p>
+</section>
+<section id="space-and-search" class="slide level1">
+<h1>Space and “Search”</h1>
+<ul>
+<li>In terms of space, the category “<strong>search</strong>” is distributed differently in each corpus</li>
+<li>Search appears early in Eskimo texts
+<ul>
+<li>Implies searching for game (<strong>hunting</strong>)</li>
+<li><strong>Decreases</strong> as story proceeds (as these activities tend to be interrupted)</li>
+</ul></li>
+<li>Search appears later in Japanese texts
+<ul>
+<li>Searches are for <strong>secrets</strong>, hidden things, special places</li>
+<li><strong>Increases</strong> with narrative time</li>
+</ul></li>
+<li>In other words, search involves <strong>different things</strong>
+<ul>
+<li>Principle of <strong>context</strong> – same words, different context, different meaning</li>
+</ul></li>
+</ul>
+</section>
+<section id="communication" class="slide level1">
+<h1>Communication</h1>
+<p><img data-src="images/colby-1966-fig-3.png" /></p>
+</section>
+<section id="culturally-significant-differences" class="slide level1">
+<h1>Culturally Significant Differences</h1>
+<ul>
+<li>10 most significant contrasts betwen distributions established by Chi Square and Kendall’s Tau tests
+<ul>
+<li>Not described :-(</li>
+</ul></li>
+<li>Out of 74 basic categories and 195 subcategories
+<ul>
+<li>Japanese – 55 tales (22%) considered distinct</li>
+<li>Eskimo – 70 tales (26%)</li>
+</ul></li>
+</ul>
+</section>
+<section id="colby-1996-fig-1a" class="slide level1 no-title">
+<h1>Colby 1996 Fig 1a</h1>
+<p><img data-src="images/colby-1966-fig-1a.png" /></p>
+<p>Ten most significant patterns of word-group frequencies (1—5)</p>
+</section>
+<section id="colby-1996-fig-1b" class="slide level1 no-title">
+<h1>Colby 1996 Fig 1b</h1>
+<p><img data-src="images/colby-1966-fig-1b.png" /></p>
+<p>Ten most significant patterns of word-group frequencies (6—10)</p>
+</section>
+<section id="some-generalizations" class="slide level1 no-title">
+<h1>Some Generalizations</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Japanese Culture</strong></p>
+<p>Externally oriented, concern with social things</p>
+<p>material objects</p>
+<p>limitatins due to domination</p>
+<p>impersonal divine justice</p>
+<p>social situations</p>
+<p>nuclear family</p>
+</div><div class="column" style="width:50%;">
+<p><strong>Eskimo Culture</strong></p>
+<p>Concern with physical abilities, individually oriented</p>
+<p>physical actions</p>
+<p>limitations due to strength</p>
+<p>magic</p>
+<p>survival</p>
+<p>extended family</p>
+</div>
+</div>
+</section>
+<section id="criticisms-and-observations" class="slide level1">
+<h1>Criticisms and Observations</h1>
+<ul>
+<li>Distributions based on <strong>small samples</strong></li>
+<li>Cultural <strong>generalization</strong> from small sample
+<ul>
+<li>May be suitable for characterized collections and subcollections of texts</li>
+</ul></li>
+<li>Sensitive to ontologies?</li>
+</ul>
+</section>
+<section id="cultural-templates" class="slide level1 no-title">
+<h1>Cultural Templates</h1>
+<p><img data-src="images/colby-cultural-templates.png" /></p>
+</section>
+<section id="typical-problems-with-content-and-sentiment-analysis" class="slide level1">
+<h1>Typical Problems with Content and Sentiment Analysis</h1>
+<ul>
+<li>Limited vocabularies</li>
+<li>Assumed monosemy</li>
+<li>Do not include grammar, syntax, punctuation, emoticons</li>
+<li>Can’t catch irony, sarcasm</li>
+<li>Can’t detect context, which can shift meanins (e.g. “large”)</li>
+</ul>
+</section>
+<section id="vader" class="slide level1">
+<h1>VADER</h1>
+<ul>
+<li>A relatively recent SA tool developed to overcome these limitations
+<ul>
+<li>Although designed for social media, is generalizable</li>
+<li>Combines existing lexicons and employs a hybrid apprach to achieve good performance</li>
+</ul></li>
+<li>Design
+<ul>
+<li>7500 lexical features</li>
+<li>Polarity</li>
+<li>Intensity [-4, +4]</li>
+<li>Gold-standard list</li>
+<li>Uses heuristics to define text characteristics (e.g. punctutation, emoticons, all caps)</li>
+<li><strong>Applies to sentences</strong></li>
+</ul></li>
+<li>Implemented in NLTK</li>
+</ul>
+</section>
+<section id="vader-flow" class="slide level1 no-title">
+<h1>VADER Flow</h1>
+<figure>
+<img data-src="images/vader-flow.png" alt="VADER Flow" /><figcaption>VADER Flow</figcaption>
+</figure>
+</section>
+<section id="vader-example" class="slide level1 no-title">
+<h1>VADER Example</h1>
+<p><img data-src="images/vader-sentiment-analysis1.png" /></p>
+</section>
+<section id="vader-example-1" class="slide level1">
+<h1>VADER Example</h1>
+<pre class="text"><code>VADER is smart, handsome, and funny. 
+    {&#39;pos&#39;: 0.746, &#39;compound&#39;: 0.8316, &#39;neu&#39;: 0.254, &#39;neg&#39;: 0.0}
+VADER is smart, handsome, and funny! 
+    {&#39;pos&#39;: 0.752, &#39;compound&#39;: 0.8439, &#39;neu&#39;: 0.248, &#39;neg&#39;: 0.0}
+VADER is very smart, handsome, and funny. 
+    {&#39;pos&#39;: 0.701, &#39;compound&#39;: 0.8545, &#39;neu&#39;: 0.299, &#39;neg&#39;: 0.0}
+VADER is VERY SMART, handsome, and FUNNY. 
+    {&#39;pos&#39;: 0.754, &#39;compound&#39;: 0.9227, &#39;neu&#39;: 0.246, &#39;neg&#39;: 0.0}
+VADER is VERY SMART, handsome, and FUNNY!!! 
+    {&#39;pos&#39;: 0.767, &#39;compound&#39;: 0.9342, &#39;neu&#39;: 0.233, &#39;neg&#39;: 0.0}
+VADER is VERY SMART, uber handsome, and FRIGGIN FUNNY!!! 
+    {&#39;pos&#39;: 0.706, &#39;compound&#39;: 0.9469, &#39;neu&#39;: 0.294, &#39;neg&#39;: 0.0}
+VADER is not smart, handsome, nor funny. 
+    {&#39;pos&#39;: 0.0, &#39;compound&#39;: -0.7424, &#39;neu&#39;: 0.354, &#39;neg&#39;: 0.646}</code></pre>
+</section>
+<section id="compounds-scores" class="slide level1">
+<h1>Compounds Scores</h1>
+<ul>
+<li>The compound score is computed by summing the valence scores of each word in the lexicon, adjusting according to the rules, and then normalizing between -1 (most extreme negative) and +1 (most extreme positive)
+<ul>
+<li>Most useful metric for single unidimensional measure of sentiment for a given sentence -‘normalized, weighted composite score’</li>
+</ul></li>
+</ul>
+</section>
+<section id="thresholds" class="slide level1">
+<h1>Thresholds</h1>
+<ul>
+<li>To classify sentences as either positive, neutral, or negative, use:
+<ul>
+<li>positive sentiment: <code>compound score &gt;= 0.05</code></li>
+<li>neutral sentiment: <code>(compound score &gt; -0.05) and (compound score &lt; 0.05)</code></li>
+<li>negative sentiment: <code>compound score &lt;= -0.05</code></li>
+</ul></li>
+<li>The pos, neu, and neg scores are ratios for proportions of text that fall in each category
+<ul>
+<li>These should all add up to be 1</li>
+<li>These are the most useful metrics if you want multidimensional measures of sentiment for a given sentence.</li>
+</ul></li>
+</ul>
+</section>
+<section id="lexicon-based-ensemble-classification-sentiment-analysis" class="slide level1">
+<h1>Lexicon-based Ensemble Classification Sentiment Analysis</h1>
+<ul>
+<li>Efficient method for counting <strong>sentiment orientation</strong></li>
+<li>Solves the <strong>problem of context</strong></li>
+<li>Outperforms supervised learning approaches in time and memory complexity without sacrificing accuracy</li>
+<li>Generates unigram, bigram and trigram lexicons</li>
+</ul>
+</section>
+<section id="frequentiment" class="slide level1">
+<h1>Frequentiment</h1>
+<ul>
+<li>Employs <strong>“frequentiment”</strong>
+<ul>
+<li>Based on frequency of features (words) in the document</li>
+<li>Averages their impact on the sentiment score compared to documents without these features</li>
+<li>Eensemble classification then used to improve the overall accuracy</li>
+<li>Outperform other popular lexicons and some supervised learners</li>
+<li>3–5 times faster than the supervised approach</li>
+</ul></li>
+<li>One of the most comprehensive comparisons of domain sentiment analysis in the literature.</li>
+</ul>
+</section>
+<section id="nrc-word-emotion-association-lexicon-aka-emolex" class="slide level1">
+<h1>NRC Word-Emotion Association Lexicon (aka EmoLex)</h1>
+<ul>
+<li>4,182 unigrams (words)</li>
+<li>English words</li>
+<li>General domain; common words</li>
+<li>Manually annotatied by crowdsourcing on Amazon Mechanical Turk (AMT)</li>
+<li>sentiments: negative, positive
+<ul>
+<li>0 (not associated) or 1 (associated)<br />
+</li>
+</ul></li>
+<li>emotions: anger, anticipation, disgust, fear, joy, sadness, surprise, trust
+<ul>
+<li>not associated, weakly, moderately, or strongly associated</li>
+</ul></li>
+<li>URL: <a href="http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm" class="uri">http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm</a></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://revealjs.com/lib/js/head.min.js"></script>
+  <script src="https://revealjs.com/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://revealjs.com/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://revealjs.com/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://revealjs.com/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

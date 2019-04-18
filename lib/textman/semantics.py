@@ -24,7 +24,7 @@ class Semantic:
         """Get the nearest word vector to a given word vector"""
         if method == 'cosine':
             sims = cosine_similarity(self.WVM.values, wv)
-        elif method == 'euclidean':
+        elif method == 'eucl   idean':
             sims = euclidean_distances(self.WVM.values, wv)
         else:
             print('Invalid method {}; defaulting to cosine.'.format(method))

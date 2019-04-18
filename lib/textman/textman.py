@@ -195,8 +195,6 @@ def add_doc_len_features(df, str_col, prefix='doc_'):
     df[prefix + 'h'] = df[prefix+'p'].multiply(np.log2(df[prefix+'p'])) * -1
     return df
 
-# %% Database Functions
-
 def get_pca(df, k=2):
     from sklearn.decomposition import PCA
     pca = PCA(k)
