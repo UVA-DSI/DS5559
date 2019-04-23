@@ -41,14 +41,6 @@
   <p class="date">23 April 2019</p>
 </section>
 
-<section class="slide level1">
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        jax: ["input/TeX", "output/SVG"],
-    })
-</script>
-</section>
 <section id="business" class="slide level1">
 <h1>Business</h1>
 <ul>
@@ -383,7 +375,7 @@ d = (f_1, f_2, f_3, ..., f_n)
 <ul>
 <li>Now, the resulting likelihood becomes:</li>
 </ul>
-<p><span class="math inline">\(P(f_1, f_2, f_3, ..., f_n|c) = P(f_1)P(f_2|f_1)P(f_3|f_1,f_2) ... P(f_n|f_1,..,f_{n-1}|c)\)</span></p>
+<p><span class="math inline">\(P(f_1, f_2, f_3, ..., f_n|c) = P(f_1|c)P(f_2|f_1,c)P(f_3|f_1,f_2,c) ... P(f_n|f_1,..,f_{n-1},c)\)</span></p>
 <ul>
 <li>But this is too hard to compute. So we employ the <strong>“naive” assumption</strong> – which we saw earlier in creating an ngram model – that each feature is <strong>independent</strong> of the others:</li>
 </ul>
