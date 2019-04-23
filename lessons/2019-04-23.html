@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Raf Alvarado">
+  <meta name="dcterms.date" content="2019-04-23">
+  <title>Classification and Naive Bayes</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://revealjs.com/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="https://revealjs.com/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="default-pandoc-slides.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://revealjs.com/css/print/pdf.css' : 'https://revealjs.com/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://revealjs.com/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Classification and Naive Bayes</h1>
+  <p class="subtitle">UVA DS 5559</p>
+  <p class="author">Raf Alvarado</p>
+  <p class="date">23 April 2019</p>
+</section>
+
+<section id="business" class="slide level1">
+<h1>Business</h1>
+<ul>
+<li><strong>Projects</strong> going OK?
+<ul>
+<li>Any blockers?</li>
+<li>We will focus on them next week</li>
+</ul></li>
+<li><strong>Quizzes</strong>
+<ul>
+<li>Still have one more to give! :-)</li>
+<li>Sorry for the delay; had to travel this weekend</li>
+</ul></li>
+</ul>
+</section>
+<section id="review" class="slide level1">
+<h1>Review</h1>
+<ul>
+<li>Sentiment analysis as a tool to study <strong>narrative</strong></li>
+<li>Can be applied to <strong>newspapers</strong> as well
+<ul>
+<li>Functions as <strong>event detection</strong></li>
+<li>Application of <strong>time series</strong> methods</li>
+</ul></li>
+<li>For those in the MSDS, consider applying <strong>Hawkes process</strong> model
+<ul>
+<li>Linguistic phenomena are <strong>point processes</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="overview" class="slide level1 assertion">
+<h1>Overview</h1>
+<p>Today, we turn to <strong>classification</strong></p>
+<p>Specifically, text of <strong>document classificaiton</strong></p>
+<p>Before getting into that, let’s <strong>situate</strong> our subject</p>
+</section>
+<section id="machine-learning-and-ai" class="slide level1 assertion">
+<h1>Machine Learning and AI</h1>
+<p><strong>Document classification</strong> is a species of <strong>classification</strong></p>
+<p>Classificaiton is a branch of <strong>machine learning</strong></p>
+<p>Machine learning is a branch of <strong>AI</strong> (historically)</p>
+</section>
+<section id="machine-learning-and-ai-1" class="slide level1">
+<h1>Machine Learning and AI</h1>
+<p><img data-src="https://www.credera.com/wp-content/uploads/2018/03/xmachinelearning.png.pagespeed.ic.MHJ9qZ0S_w.png" /></p>
+<p>From <a href="https://www.credera.com/blog/technology-solutions/machine-learning-essentials/">Credera</a></p>
+</section>
+<section id="machine-learning-image" class="slide level1 no-title">
+<h1>Machine Learning Image</h1>
+<p><img data-src="images/ml-diagram.jpg" /></p>
+<p>See <a href="https://vas3k.com/blog/machine_learning/">Machine Learning for Everyone</a></p>
+</section>
+<section id="machine-learning-image-1" class="slide level1 no-title">
+<h1>Machine Learning Image</h1>
+<p><img src="https://i.vas3k.ru/7vx.jpg" height="600"/></p>
+</section>
+<section id="classification" class="slide level1">
+<h1>Classification</h1>
+<ul>
+<li>Classification refers to the task of <strong>predicting the category</strong> of a thing when <strong>the use</strong> of the category on similar things <strong>is known</strong>
+<ul>
+<li>Categories are also called classes, labels, and annotations</li>
+<li>Prediction based on <strong>learning the rules</strong> that govern the application of the label by humans</li>
+</ul></li>
+<li>Traditional AI sought to develop a <strong>deductive system</strong> of rules
+<ul>
+<li>The goal was to develop encyclopaedic knowledge of the world within which inferences can be mechanically drawn</li>
+<li>The ancient dream of logic</li>
+</ul></li>
+<li>Machine learning applied more <strong>“brute force” methods</strong> to learn rules statistically
+<ul>
+<li>Inductive approach</li>
+<li>Instead of rules, we <strong>learn statistical models</strong></li>
+<li>These models may or may not be <strong>interpretable</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="classification-and-inference" class="slide level1">
+<h1>Classification and Inference</h1>
+<ul>
+<li><strong>Inductive inference</strong>
+<ul>
+<li>Learning a rule from data, and then applying that rule to other data</li>
+<li>Deduction = working within rules alone (e.g. theorems)</li>
+<li>Many forms of inference, including <em>abduction</em></li>
+</ul></li>
+<li><strong>Inference</strong> and <strong>prediction</strong> often constrasted
+<ul>
+<li>Inference = science</li>
+<li>Predicton = decision-making</li>
+</ul></li>
+</ul>
+</section>
+<section id="a-more-formal-definition" class="slide level1">
+<h1>A More Formal Definition</h1>
+<ul>
+<li>Formal definition
+<ul>
+<li><span class="math inline">\(\textbf{y}\)</span>: A vector (column) of <strong>labels</strong>
+<ul>
+<li>What you are trying to predict</li>
+</ul></li>
+<li><span class="math inline">\(\textbf{X}\)</span>: A matrix of <strong>feature</strong> vectors (rows, each <span class="math inline">\(\textbf{x}\)</span>)
+<ul>
+<li>The information you have</li>
+<li>Each vector element a member of a domain (column)</li>
+</ul></li>
+<li><span class="math inline">\(\hat{y}\)</span> is the symbol for the guessed or predicted value of <span class="math inline">\(\textbf{y}\)</span></li>
+</ul></li>
+<li>Many synonyms for <span class="math inline">\(X\)</span> and <span class="math inline">\(\textbf{y}\)</span>
+<ul>
+<li>treatment / response, feature / label, cause / effect, etc.</li>
+</ul></li>
+<li>Represented in a <strong>dataframe</strong>
+<ul>
+<li><strong>Observations</strong> = <strong><span class="math inline">\((x_{1i}, x_{2i}, ..., x_{ji})\)</span></strong> and <span class="math inline">\(y_i\)</span> (and <span class="math inline">\(\hat{y}_i\)</span> too)</li>
+</ul></li>
+</ul>
+</section>
+<section id="document-classification" class="slide level1">
+<h1>Document Classification</h1>
+<ul>
+<li><span class="math inline">\(\textbf{x}\)</span> is <span class="math inline">\(d\)</span> (for a document)</li>
+<li><span class="math inline">\(\textbf{y}\)</span> is <span class="math inline">\(C\)</span> (for the classes)
+<ul>
+<li><span class="math inline">\(C = \{c_1, c_2, ..., c_j\}\)</span></li>
+<li>The features are often word counts</li>
+</ul></li>
+<li><span class="math inline">\(m\)</span> stands for a set of labeled documents
+<ul>
+<li><span class="math inline">\((d_1,c_1),...,(d_m,c_m)\)</span></li>
+</ul></li>
+<li><span class="math inline">\(V\)</span> often used for the vocabulary of word types
+<ul>
+<li>Although <span class="math inline">\(w\)</span> is often used for the word instance (i.e. the token)</li>
+</ul></li>
+<li>In addition, the position of the token is referenced by the subfix <span class="math inline">\(i\)</span>, as in <span class="math inline">\(w_i\)</span></li>
+</ul>
+</section>
+<section id="some-text-classification-tasks" class="slide level1">
+<h1>Some Text Classification Tasks</h1>
+<ul>
+<li>Spam detection</li>
+<li>Language identification</li>
+<li>Subject grouping</li>
+<li>Genre detection</li>
+<li>Author attribution</li>
+<li>Etc.</li>
+</ul>
+</section>
+<section id="standard-machine-classifiers-for-document-classification" class="slide level1">
+<h1>Standard Machine Classifiers for Document Classification</h1>
+<ul>
+<li>Linear Regression</li>
+<li>Logistic Regression</li>
+<li>Support Vector Machines (SVMs)</li>
+<li><strong>Naive Bayes</strong></li>
+<li>Decision Trees and Random Forests</li>
+<li>Neural Networks</li>
+</ul>
+</section>
+<section id="the-machine-learning-pipeline" class="slide level1">
+<h1>The Machine Learning Pipeline</h1>
+<p><img data-src="https://cdn-images-1.medium.com/max/1600/1*mIEg0YdM_lt4Gp4455kaQQ.png" /></p>
+</section>
+<section id="text-analytic-specific" class="slide level1">
+<h1>Text Analytic Specific</h1>
+<ul>
+<li><strong>Data Preparation</strong>
+<ul>
+<li><strong>Data wrangling</strong> means conversion into text data model and then <strong>analytical format</strong> of features and response variable</li>
+<li>Often, this is a <strong>bag-of-words</strong> representation</li>
+<li>Feature selection may involve <strong>TFIDF</strong> or even <strong>SVD</strong></li>
+<li><strong>Expected Mutual Information</strong>, based on contribution of feature to prediction</li>
+</ul></li>
+<li><strong>Modeling</strong>
+<ul>
+<li>Choice of <strong>model</strong> and implementation <strong>algorithm</strong></li>
+<li><strong>Splitting</strong> into training and testing subsets</li>
+<li>May include further division of training set into training and <strong>held-out dev set</strong> for paramater tuning</li>
+</ul></li>
+<li>Performance and Evaluation
+<ul>
+<li><strong>Recall</strong>, <strong>Precision</strong>, and <strong>F-score</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="text-analytic-specific-contd" class="slide level1">
+<h1>Text Analytic Specific (cont’d)</h1>
+<ul>
+<li><strong>Significance Testing</strong>
+<ul>
+<li><strong>Traditional statistical methods aren’t used</strong> (e.g. p-values) because performance test results are non-Gaussian</li>
+<li>Instead, we use non-parametric methods such as <strong>bootstrapping</strong></li>
+</ul></li>
+<li><strong>Interpretation</strong>
+<ul>
+<li>Application of domain knowledge, user feedback, etc.</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-document-classification-problem" class="slide level1">
+<h1>The Document Classification Problem</h1>
+<ul>
+<li>Can be understood as a problem in <strong>Bayesian inference</strong>. You are trying to estimate <span class="math display">\[
+P(C|d)
+\]</span></li>
+<li><p>That is, for document <span class="math inline">\(d\)</span> out of all classes <span class="math inline">\(c \in C\)</span>, find the class <span class="math inline">\(c\)</span> Maximum A Posteriori value <span class="math display">\[
+\hat{c} = \text{arg} \text{max} P(c_i|d)
+\]</span></p></li>
+<li><p>Naive Bayes provides a method based on this idea</p></li>
+</ul>
+</section>
+<section id="naive-bayes-nb" class="slide level1">
+<h1>Naive Bayes (NB)</h1>
+<ul>
+<li><strong>Generative</strong>
+<ul>
+<li>In contrast to discriminate classifiers like logistic regression</li>
+<li>Discriminative classifiers are more accurate and thus more common</li>
+<li>Generative still have a role</li>
+</ul></li>
+<li><strong>Ptobabilistic</strong>
+<ul>
+<li>Assigns a float between 0 and 1</li>
+</ul></li>
+<li><strong>Peformant</strong>
+<ul>
+<li>Not always the best performer, but very fast and easy to implement</li>
+<li>Used as a baseline</li>
+</ul></li>
+<li>Why is it called <strong>naive</strong>?
+<ul>
+<li>Because of the independence assumption (more below)</li>
+</ul></li>
+</ul>
+</section>
+<section id="bayes-theorem-derivation" class="slide level1">
+<h1>Bayes’ Theorem: Derivation</h1>
+<p><span class="math display">\[
+P(a,b) = P(a)P(b|a)
+\]</span> <span class="math display">\[
+P(b,a) = P(b)P(a|b)
+\]</span> <span class="math display">\[
+P(a,b) = P(b,a)
+\]</span> <span class="math display">\[
+P(a)P(b|a) = P(b)P(a|b)
+\]</span> <span class="math display">\[
+P(a|b) =  \dfrac{P(a)P(b|a)}{P(b)}
+\]</span></p>
+</section>
+<section id="bayes-theorem-elements" class="slide level1">
+<h1>Bayes’ Theorem: Elements</h1>
+<p><span class="math display">\[
+P(a|b) =  \dfrac{P(a)P(b|a)}{P(b)}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(a\)</span>: Cause, Hypothesis, Model</li>
+<li><span class="math inline">\(b\)</span>: Effect, Evidence, Data</li>
+<li><span class="math inline">\(P(a)\)</span>: The Prior<br />
+</li>
+<li><span class="math inline">\(P(b|a)\)</span>: The Likelihood</li>
+<li><span class="math inline">\(P(a|b)\)</span>: The Posterior<br />
+</li>
+<li><span class="math inline">\(P(b)\)</span>: Normalizing constant (often drops out; also often unknowable)</li>
+</ul>
+</section>
+<section id="philosophical-aside" class="slide level1">
+<h1>Philosophical Aside</h1>
+<ul>
+<li>There is a directionality implied by Bayes’ theorem
+<ul>
+<li><span class="math inline">\(a\)</span> causes <span class="math inline">\(b\)</span></li>
+</ul></li>
+<li><span class="math inline">\(b\)</span> must be a member of disjoint and exhaustive set of possible outcomes (<span class="math inline">\(B\)</span>)
+<ul>
+<li><span class="math inline">\(P(B)\)</span> sums to 1</li>
+</ul></li>
+<li>Note that <span class="math inline">\(A\)</span> does not sum to one
+<ul>
+<li>Each is drawn from a differenct distribution</li>
+</ul></li>
+</ul>
+</section>
+<section id="arrow-of-information" class="slide level1 no-title">
+<h1>Arrow of Information</h1>
+<p><img src="images/IMG_20190423_094312.jpg" height="600"/></p>
+</section>
+<section id="pearl-on-likelihood" class="slide level1">
+<h1>Pearl on Likelihood</h1>
+<p><img data-src="images/pearl-on-likelihoods.png" /></p>
+</section>
+<section id="bayes-theorem-vs-rule" class="slide level1">
+<h1>Bayes’ Theorem vs Rule</h1>
+<ul>
+<li>Note that Bayes’ <strong>Theorem</strong> and Bayes’ <strong>Rule</strong> are not the same</li>
+<li>Bayes’ Rule refers to the ability to drop out the denominator when comparing hypotheses: <span class="math display">\[
+\dfrac{P(H_1|e)}{P(H_2|e)} = \dfrac{P(H_1)P(e|H_1)}{P(H_2)P(e|H_2)}
+\]</span></li>
+</ul>
+</section>
+<section id="bayes-appled-to-text" class="slide level1">
+<h1>Bayes Appled to Text</h1>
+<ul>
+<li>Applied to problem of predicting the class of a text, we have:</li>
+</ul>
+<p><span class="math display">\[
+\hat{c} = \underset{c \in C}{\arg\max} \dfrac{P(c)P(d|c)}{P(d)}
+\]</span></p>
+<ul>
+<li>Since <span class="math inline">\(P(d)\)</span> is common to all <span class="math inline">\(C\)</span>, we can simplify:</li>
+</ul>
+<p><span class="math display">\[
+\hat{c} = \underset{c \in C}{\arg\max} P(c)P(d|c)
+\]</span></p>
+<ul>
+<li>Now, <span class="math inline">\(d\)</span> is just a joint distribution of features (words), so:</li>
+</ul>
+<p><span class="math display">\[
+d = (f_1, f_2, f_3, ..., f_n)
+\]</span></p>
+<ul>
+<li>And so we can rewrite our formula as:</li>
+</ul>
+<p><span class="math display">\[
+\hat{c} =  \underset{c \in C}{\arg\max} P(c)P(f_1, f_2, f_3, ..., f_n|c)
+\]</span></p>
+</section>
+<section id="being-naive" class="slide level1">
+<h1>Being Naive</h1>
+<ul>
+<li>Now, the resulting likelihood becomes:</li>
+</ul>
+<p><span class="math inline">\(P(f_1, f_2, f_3, ..., f_n|c) = P(f_1)P(f_2|f_1)P(f_3|f_1,f_2) ... P(f_n|f_1,..,f_{n-1}|c)\)</span></p>
+<ul>
+<li>But this is too hard to compute. So we employ the <strong>“naive” assumption</strong> – which we saw earlier in creating an ngram model – that each feature is <strong>independent</strong> of the others:</li>
+</ul>
+<p><span class="math inline">\(P(f_1, f_2, f_3, ..., f_n|c) = P(f_1|c)P(f_2|c)P(f_3|c) ... P(f_n|c)\)</span></p>
+<ul>
+<li>Which we can express compactly as:</li>
+</ul>
+<p><span class="math inline">\(P(d|c) = \prod_{n=1}^{N} P(f_n|c)\)</span></p>
+<ul>
+<li>And so:</li>
+</ul>
+<p><span class="math inline">\(c_{NB} = \underset{c \in C}{\arg\max} P(c)\prod_{n=1}^{N} P(f_n|c)\)</span></p>
+</section>
+<section id="applying-to-the-corpus" class="slide level1">
+<h1>Applying to the corpus</h1>
+<ul>
+<li>In terms of our of corpus model:</li>
+</ul>
+<p><span class="math display">\[
+c_{NB} = \arg\max P(c)\prod_{id=1}^{id_{max}} P(token_{id}|c)
+\]</span></p>
+<ul>
+<li>Since sums of logs are easier to compute than products, we can do this:</li>
+</ul>
+<p><span class="math display">\[
+c_{NB} = \arg\max \log{P(c)} + \sum_{id=1}^{id_{max}} \log{P(token_{id}|c)}
+\]</span></p>
+</section>
+<section id="training-the-classifier" class="slide level1">
+<h1>Training the Classifier</h1>
+<ul>
+<li>We estimate the probabilities in our formula by using Maximum Likelihood Estimation (MLE)
+<ul>
+<li>i.e. by using frequencies as proxies for probabilities.</li>
+</ul></li>
+<li>So, to <strong>estimate the prior</strong>, <span class="math inline">\(P(c)\)</span>, we count the number of documents in our training set with the class and divide by the total number documents:</li>
+</ul>
+<p><span class="math display">\[
+\hat{P}(c) = \dfrac{N_{c}}{N_{d}}
+\]</span></p>
+<ul>
+<li>sAnd to <strong>estimate our likelihood</strong>, <span class="math inline">\(P(f_i|c)\)</span>, we count the frequency of <span class="math inline">\(w_i\)</span> in all documents classified as <span class="math inline">\(c\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\hat{P}(w_i|c) = \dfrac{count(w_i,c)}{\sum_{w \in V} count(w,c)}
+\]</span></p>
+</section>
+<section id="word-problems-1" class="slide level1">
+<h1>Word Problems 1</h1>
+<ul>
+<li>What about words in the test set that are <strong>in one class but not in the other(s)</strong>?
+<ul>
+<li>They have a probability of <span class="math inline">\(0\)</span> for the class they don’t appear in
+<ul>
+<li>Thus they will make the document have a probability of <span class="math inline">\(0\)</span> for that class</li>
+</ul></li>
+<li>Consider the case of a word used ironically in the test set …</li>
+</ul></li>
+<li>To fix, we apply <strong>LaPlace “add 1” smoothing</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\hat{P}(w_i|c) = \dfrac{count(w_i,c)+1}{\sum_{w \in V} (count(w,c)+1)} = \dfrac{count(w_i,c)+1}{(\sum_{w \in V} count(w,c))+|V|} 
+\]</span></p>
+<ul>
+<li>Note that <span class="math inline">\(V\)</span> stands for the set of all words, i.e. in all classes.
+<ul>
+<li>This would not matter, except we need to account for words in the test set not found in training.</li>
+</ul></li>
+</ul>
+</section>
+<section id="word-problems-2" class="slide level1">
+<h1>Word Problems 2</h1>
+<ul>
+<li>What about <strong>unknown words</strong>
+<ul>
+<li>Words not in the training set at all</li>
+</ul></li>
+<li>The accepted solution is to <strong>ignore them</strong>
+<ul>
+<li>We don’t include them in the probability function during testing or application</li>
+<li>Harsh, yet effective :-)</li>
+</ul></li>
+</ul>
+</section>
+<section id="stop-words" class="slide level1">
+<h1>Stop Words</h1>
+<ul>
+<li>It turns out that removing stop words <strong>does not improve performance</strong></li>
+<li>So, we can <strong>leave them</strong> in the training set</li>
+<li>Keeping them out might improve <strong>compute speed</strong> slightly, though</li>
+<li>Not sure about <strong>keeping only TFIDF</strong> significant words, though …</li>
+</ul>
+</section>
+<section id="naive-bayes-as-language-model" class="slide level1">
+<h1>Naive Bayes as Language Model</h1>
+<ul>
+<li>To the extent the NB classifiers use only words, they are effectively based on <strong>language models for each class</strong>
+<ul>
+<li>A Bayes model is a set of class-specific unigram language models</li>
+<li>A language model is the set of likelihoods for each word given a class</li>
+<li>Just as LDA creates language models for each topic</li>
+</ul></li>
+<li>We can use the likelihoods to assign probabilities to sentences <span class="math display">\[
+P(s|c) = \prod_{i \in positions} P(w_i|c)
+\]</span></li>
+<li>This confirms Pearl’s point about likelihoods
+<ul>
+<li>The likelihoods in our model language models</li>
+<li>They are the building blocks of our model of language</li>
+<li>They have a certain independence of the text, like language models</li>
+</ul></li>
+</ul>
+</section>
+<section id="feature-selection" class="slide level1">
+<h1>Feature Selection</h1>
+<p><img src="images/mi-classes.png"  height="600" /></p>
+<p>See Manning, et al. 2008</p>
+</section>
+<section id="model-performance-evaluation" class="slide level1">
+<h1>Model Performance Evaluation</h1>
+<ul>
+<li>We evaluate the performance of our model by comparing the results of our predictions on the test set with the actual labels in that set</li>
+<li>These labels are called <strong>gold standard</strong> labels or <strong>ground truth</strong> labels</li>
+<li>These results are usually represented in a <strong>contingency table</strong> or <strong>confusion matrix</strong></li>
+</ul>
+</section>
+<section id="results" class="slide level1 no-title">
+<h1>Results</h1>
+<p><img data-src="images/dataframe-of-results.png" /></p>
+</section>
+<section id="contingency-tables" class="slide level1">
+<h1>Contingency Tables</h1>
+<p><img data-src="images/contingency-table.png" /></p>
+</section>
+<section id="precision-recall-and-f-measure" class="slide level1">
+<h1>Precision, Recall, and F-Measure</h1>
+<ul>
+<li>In text analytics, we are mainly concerned with precision and recall</li>
+<li><strong>Precision</strong> measures the percentage of the items that the were labeled as positive that are positive according to the human gold labels.
+<ul>
+<li>TP / TP + FP</li>
+</ul></li>
+<li><strong>Recall</strong> measures the percentage of items actually present in the input that were correctly labeled.
+<ul>
+<li>TP / TP + FN</li>
+</ul></li>
+<li><strong>F-meausre</strong> = the harmonic mean of the two
+<ul>
+<li>See below</li>
+<li>Necessary because it’s easy to fool each measure in isolation</li>
+</ul></li>
+<li><strong>Accuracy</strong> = (TP + TN) / ALL</li>
+</ul>
+</section>
+<section id="sensitity-vs.precision" class="slide level1">
+<h1>Sensitity vs. Precision</h1>
+<p>Why is precision sometimes called <strong>sensitivity</strong>?</p>
+<p><img data-src="images/sensitivty-specificity.png" /></p>
+<p>Used in medicine because: “A doctor can tell a patient if they’re pregnant or not or if they have cancer. Each decision may have grave consequences and thus <strong>true negatives are crucial</strong>. That’s why all the cells in the confusion matrix must be taken into account.”</p>
+<p><img data-src="images/precision-recall.png" /></p>
+<p>Used in Information retrieval <span class="math inline">\(\therefore\)</span> text analytics because: “A search engine <strong>only cares about the results it shows you</strong>. Are they relevant (TP) or are they spam (FP)? Did it miss any relevant results (FN)? The ocean of ignored (TN) results shouldn’t affect how good or bad a search algorithm is. That’s why true negatives can be ignored.”</p>
+</section>
+<section id="performance-metrics-as-probabilities" class="slide level1">
+<h1>Performance Metrics as Probabilities</h1>
+<p><span class="math inline">\(P = 1\)</span></p>
+<p><span class="math inline">\(N = 0\)</span></p>
+<p><span class="math inline">\(\pi: predicted \in \{0,1\}\)</span></p>
+<p><span class="math inline">\(\alpha: actual \in \{0,1\}\)</span></p>
+<p><span class="math inline">\(T: p(\alpha = \pi) = T_0 + T_1\)</span></p>
+<p><span class="math inline">\(F: p(\alpha \not= \pi) = F_0 + F_1\)</span></p>
+<p><span class="math inline">\(TP = T_1 = p(\alpha=1, \pi=1)\)</span></p>
+<p><span class="math inline">\(TN = T_0 = p(\alpha=0, \pi=0)\)</span></p>
+<p><span class="math inline">\(FP = F_1 = p(\alpha=0, \pi=1)\)</span></p>
+<p><span class="math inline">\(FN = F_0 = p(\alpha=1, \pi=0)\)</span></p>
+</section>
+<section id="metrics-as-probabilities" class="slide level1 no-title">
+<h1>Metrics as Probabilities</h1>
+<p><strong>Sensitivity or Recall (TPR)</strong> <span class="math display">\[
+p(\pi=1|\alpha=1)
+\]</span></p>
+<p><strong>Specificity (TNR)</strong><br />
+<span class="math display">\[
+p(\pi=0|\alpha=0)
+\]</span></p>
+<p><strong>Precision (PPV)</strong><br />
+<span class="math display">\[
+p(\alpha=1|\pi=1)
+\]</span></p>
+</section>
+<section id="metrics-as-probabilities-1" class="slide level1 no-title">
+<h1>Metrics as Probabilities</h1>
+<p><strong>Accuracy</strong>: <span class="math display">\[
+\text{ACC} = \dfrac{T}{T + F} = \dfrac{p(\alpha = \pi)}{p(\alpha=\pi) + p(\alpha\not=\pi)}
+\]</span></p>
+<p><strong>Balanced Accuracy:</strong> <span class="math display">\[
+\text{BA} = \dfrac{R(T_0)+R(T_1)}{2} = \dfrac{p(\pi=0|\alpha=0) + p(\pi=1|\alpha=1)}{2}
+\]</span></p>
+<p><strong>F-Score:</strong> <span class="math display">\[
+\text{F}_\beta = \dfrac{(\beta^2 + 1)PR}{\beta^2(P+R)} \\
+\]</span></p>
+<p><span class="math display">\[
+\text{F}_1 = \dfrac{2PR}{P+R} \\
+\]</span></p>
+</section>
+<section id="sentiment-analysis-optimization-hacks" class="slide level1">
+<h1>Sentiment Analysis Optimization Hacks</h1>
+</section>
+<section id="hack-1" class="slide level1">
+<h1>Hack 1</h1>
+<ul>
+<li>Counts don’t matter as much as presence or absence in a document, so just count once per document
+<ul>
+<li>Called <strong>Binary NB</strong></li>
+</ul></li>
+<li>Remove duplicate words
+<ul>
+<li>Or just convert count column in BOW dataframe to <code>bool</code> then <code>int</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="hack-2" class="slide level1">
+<h1>Hack 2</h1>
+<ul>
+<li>To handle negation – cases where words are negated – add a <code>not_</code> prefix to words that follow a negation word, up to the end of a sentence
+<ul>
+<li><code>didn't like this movie, but I</code></li>
+<li>becomes</li>
+<li><code>didnt NOT_like NOT_this NOT_movie,  but I</code></li>
+</ul></li>
+<li>Do this during preprocessing, effectively creating new words</li>
+</ul>
+</section>
+<section id="hack-3" class="slide level1">
+<h1>Hack 3</h1>
+<ul>
+<li>Use a <strong>lexicon</strong> to define sentiment in training and test sets</li>
+<li>Use just positive and negative terms in the NB equation</li>
+<li>Useful when we have <strong>little training data</strong>, data is sparse, or test and training sets are divergent</li>
+<li>Seems like cheating, tho</li>
+</ul>
+</section>
+<section id="hack-4" class="slide level1">
+<h1>Hack 4</h1>
+<ul>
+<li>In spam detection, use <strong>para-linguitic features</strong>
+<ul>
+<li>All caps in subject line</li>
+<li>Mention of large sums of money</li>
+<li>Contains other tell-tale phrases</li>
+</ul></li>
+</ul>
+</section>
+<section id="hack-5" class="slide level1">
+<h1>Hack 5</h1>
+<ul>
+<li>In language ID, use byte and character ngrams
+<ul>
+<li>Distinctive character sequences</li>
+</ul></li>
+<li>Also train on mulitlingual (e.g. Wikipedia) and geocoded (e.g. Twitter) corpora</li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://revealjs.com/lib/js/head.min.js"></script>
+  <script src="https://revealjs.com/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://revealjs.com/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://revealjs.com/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://revealjs.com/plugin/math/math.js', async: true },
+          { src: 'https://revealjs.com/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

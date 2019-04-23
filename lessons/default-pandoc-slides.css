@@ -5,7 +5,7 @@
 }
 
 .reveal h1, .reveal h2 {
-    color: darkorange;
+    color: navy;
 }
 
 .reveal h1 {
@@ -27,7 +27,7 @@
 }
 
 .reveal p, td, li {
-    color: navy;
+    color: #777;
     font-size: 20pt;
     margin-bottom: .5rem;
     display: block;
@@ -169,4 +169,12 @@ figcaption {
     text-align: left;
 }
 
+.reveal .math * {
+    color: black;
+}
+
+.reveal code {
+    font-weight: bold;
+    color: #555;
+}
 
