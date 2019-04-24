@@ -340,7 +340,7 @@
 <section id="results" class="slide level1 no-title">
 <h1>Results</h1>
 <figure>
-<img data-src="/Users/rca2t/Dropbox/Courses/DSI/DS5559/UVA_DSI_REPO/lessons/images/dendrogram.png" alt="Resulting dendogram showing six major clusters" /><figcaption>Resulting dendogram showing six major clusters</figcaption>
+<img data-src="images/dendrogram.png" alt="Resulting dendogram showing six major clusters" /><figcaption>Resulting dendogram showing six major clusters</figcaption>
 </figure>
 </section>
 <section id="two-major-types" class="slide level1 no-title">
@@ -665,11 +665,28 @@
         history: true,
         // Transition style
         transition: 'none', // none/fade/slide/convex/concave/zoom
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
 
         // Optional reveal.js plugins
         dependencies: [
           { src: 'https://revealjs.com/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'https://revealjs.com/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://revealjs.com/plugin/math/math.js', async: true },
           { src: 'https://revealjs.com/plugin/notes/notes.js', async: true }
         ]
       });
