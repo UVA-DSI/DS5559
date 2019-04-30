@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=EB+Garamond|Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond|Roboto+Condensed|Amiri|Open+Sans');
 
 .slides section {
     top: 1in;
@@ -9,40 +9,41 @@
 }
 
 .reveal h1 {
-    font-size: 32pt;
+    font-size: 36pt;
     text-align: left;
     text-transform: none;
-    /* font-family: 'EB Garamond', serif;  */
+    /* font-family: Open+Sans, sans-serif; */
+    /* font-family: Amiri, 'EB Garamond', serif;  */
     font-family: 'Roboto Condensed', sans-serif;
     /* font-family: "Futura", Helvetica, sans-serif; */
 }
 
 .reveal h2 {
-    font-size: 28pt;
+    font-size: 32pt;
     text-align: left;
     text-transform: none;
-    /* font-family: 'EB Garamond', serif; */
+    /* font-family: Open+Sans, sans-serif; */
+    /* font-family: Amiri, 'EB Garamond', serif; */
     font-family: 'Roboto Condensed', sans-serif;
     /* font-family: "Futura", Helvetica, sans-serif; */
 }
 
 .reveal p, td, li {
-    color: #777;
-    font-size: 20pt;
+    /* color: #777; */
+    color: black;
+    font-size: 30pt;
     margin-bottom: .5rem;
     display: block;
-    line-height: 24pt;
-    /* font-family: 'EB Garamond', serif;  */
-    font-family: 'Roboto Condensed', sans-serif;
+    line-height: 36pt;
+    font-family: Amiri, 'EB Garamond', serif; 
+    /* font-family: 'Roboto Condensed', sans-serif; */
     /* font-family: "Futura", Helvetica, sans-serif; */
 }
 
 .reveal strong {
     font-size: 100%;
-    font-weight: bold;
-    color: darkorange;
-    /* text-decoration: underline; */
-    /* border-bottom: 5px solid orange; */
+    font-weight: bolder;
+    font-variant-caps: all-petite-caps;    
 }
 
 .reveal ol, .reveal ul {
@@ -129,8 +130,8 @@ figcaption {
 
 .reveal .assertion * {
     text-align: center;
-    font-size: 28pt;
-    line-height: 36pt; 
+    /* font-size: 30t;
+    line-height: 36pt;  */
 }
 
 .reveal .assertion h1, 
@@ -178,3 +179,10 @@ figcaption {
     color: #555;
 }
 
+.reveal .smaller * {
+    font-size: 90%;
+}
+
+.reveal .center {
+    text-align: center;
+}

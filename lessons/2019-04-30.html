@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Raf Alvarado">
+  <meta name="dcterms.date" content="2019-04-30">
+  <title>Conclusion</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://revealjs.com/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="https://revealjs.com/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="default-pandoc-slides.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://revealjs.com/css/print/pdf.css' : 'https://revealjs.com/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://revealjs.com/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Conclusion</h1>
+  <p class="subtitle">UVA DS 5559</p>
+  <p class="author">Raf Alvarado</p>
+  <p class="date">30 April 2019</p>
+</section>
+
+<section id="business" class="slide level1">
+<h1>Business</h1>
+<ul>
+<li>Project <strong>data products</strong> due <strong>today by 5:00</strong>
+<ul>
+<li>Contact me if you need more time</li>
+</ul></li>
+<li>Project <strong>final reports</strong> due next <strong>Tuesday, May 7<sup>th</sup> at noon</strong>
+<ul>
+<li>Again, contact me if you think you will be late</li>
+</ul></li>
+</ul>
+</section>
+<section id="review" class="slide level1">
+<h1>Review</h1>
+<ul>
+<li>Supervised methods useful in ETA
+<ul>
+<li><strong>Document classification</strong> has many uses, e.g. genre prediction</li>
+<li>Entire field of <strong>stylometrics</strong> seeks to predict authorship, etc.</li>
+</ul></li>
+<li>The Bayesian approach goes beyond the Naïve Bayes classifier
+<ul>
+<li>Frames machine learning in terms of <strong>probability theory</strong></li>
+<li>Prediction as <strong>posterior estimation</strong></li>
+<li>The importance of <strong>likelihoods</strong></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level1">
+
+<p><strong>Likelihoods</strong> show the relationship between<br />
+known <strong>causes</strong> and <strong>effects</strong></p>
+<p><img src="https://i0.wp.com/www.joshuatan.com/wp-content/uploads/2018/04/bayesian_network_sprinklers.png"
+height="300" /></p>
+<p>Each node’s outgoing arrows represent likelihoods</p>
+<p>Prediction involves going against <strong>the arrow of information</strong></p>
+</section>
+<section class="slide level1">
+
+<p>In the case of text, we have seen that<br />
+<strong>topics</strong> play the role of <strong>causes</strong></p>
+<p>Topics (Language Models) <span class="math inline">\(\rightarrow\)</span> Documents</p>
+<p><img data-src="images/llustrates-the-kind-of-generative-Bayesian-topic-model-widely-used-to-cluster-static_W640.jpg" /></p>
+<p><em>If topics don’t exist, it is necessary to invent them</em></p>
+</section>
+<section class="slide level1">
+
+<div class="columns">
+<div class="column">
+<p><strong>Supervised</strong><br />
+methods</p>
+<hr />
+<p>Infers <em>parts</em> from <em>whole</em></p>
+<p><em>Informed by</em> human judgment</p>
+<p>Goal is <em>prediction</em></p>
+<p>Truth</p>
+</div><div class="column">
+<p><strong>Unsupervised</strong><br />
+methods</p>
+<hr />
+<p>Infers <em>whole</em> from <em>parts</em></p>
+<p><em>Informs</em> human judgement</p>
+<p>Goal is <em>perception</em></p>
+<p>Meaning (Sense)</p>
+</div>
+</div>
+<p><br/><br/> (meaning precedes truth)</p>
+</section>
+<section class="slide level1">
+
+<div class="columns">
+<div class="column align-left smaller" style="width:20%;">
+<p>Making sense of data</p>
+</div><div class="column" style="width:80%;">
+<p><img src="https://static1.squarespace.com/static/58b89382db29d626268df4f4/t/58bc374f9f7456dff809bf06/1488729991706/Figure13+copy.png?format=1000w" height="600" /></p>
+</div>
+</div>
+</section>
+<section id="the-owl-of-minerva" class="slide level1 assertion">
+<h1>The Owl of Minerva</h1>
+<p>“The Owl of Minerva only flies at dusk.”<br />
+– G.F.W. Hegel</p>
+<p><img src="images/owl.png" height="350"></p>
+<p>(We really understand things only after they are finished)</p>
+</section>
+<section class="slide level1">
+
+<p>Text analytics requires <strong>domain knowledge</strong><br />
+about <strong>languange</strong> and <strong>culture</strong></p>
+</section>
+<section class="slide level1">
+
+<p>Some sources of domain knowledge:</p>
+<p>Linguistics<br />
+Hermeneutics<br />
+Literary Criticism<br />
+Text Criticism<br />
+Sociolinguistics</p>
+</section>
+<section class="slide level1">
+
+<p>From linguistics we know:</p>
+<p>language is composed of <strong>grammar</strong> and <strong>discourse</strong></p>
+</section>
+<section class="slide level1">
+
+<p>Grammar: <em>finite generative rules</em></p>
+<p>Discourse: <em>infinite generated outcomes</em></p>
+</section>
+<section class="slide level1">
+
+<p>From hermeneutics and text criticism we know:</p>
+<p>Written documents, as fixed discourse, exhibit a <strong>discursive structure</strong></p>
+<p>E.g. Corpus, Book, Chapter, Verse, Sentence</p>
+</section>
+<section class="slide level1">
+
+<p>The <strong>utterance</strong> is the elementary unit of discourse</p>
+</section>
+<section class="slide level1">
+
+<p>Meaning emerges in the assertion of something about somethig (<strong>the “said”</strong>)</p>
+<p><strong>Reference</strong> is an act, a form of <em>situated action</em></p>
+<p>“Meanings” as we understand them are recordings of usages in dictionaries</p>
+<p>But dictionaries do not capture the <strong>generative mechanism</strong> of language</p>
+</section>
+<section class="slide level1">
+
+<p>From hermeneutics and sociolinguistics we know:</p>
+<p>The generative mechanism of language<br />
+is bound up with <strong>culture</strong></p>
+<p>Culture consists of <strong>ethos</strong> and <strong>worldview</strong><br />
+encoded in <strong>symbols</strong> shared by <strong>communities</strong></p>
+<p>Language use is shaped this deeper structure<br />
+(<strong>non-ostensive reference</strong>)</p>
+</section>
+<section class="slide level1">
+
+<p><img data-src="images/colby-cultural-templates.png" /></p>
+</section>
+<section class="slide level1">
+
+<p>From these domains, an <strong>ontology</strong> of text emerges</p>
+<p><strong>language</strong><br />
+<span class="math inline">\(\downarrow\)</span><br />
+<strong>culture</strong><br />
+<span class="math inline">\(\downarrow\)</span><br />
+<strong>text</strong></p>
+<p>The core <strong>methods</strong> of text analytics map onto these levels</p>
+</section>
+<section class="slide level1">
+
+<h2 id="language" class="center">Language</h2>
+<p>Spelling (phonemes), vocabulary, grammar, etc.</p>
+<p><em>modeled by</em></p>
+<p>N-gram Language Models<br />
+(characters and strings)<br />
+NLP annotations (POS, etc.)</p>
+</section>
+<section class="slide level1">
+
+<h2 id="culture" class="center">Culture</h2>
+<p>Topics, sentiment, analogies</p>
+<p><em>modeled by</em></p>
+<p>Topic Models<br />
+Sentiment Lexicons<br />
+Word embeddings</p>
+</section>
+<section class="slide level1">
+
+<h2 id="texts" class="center">Texts</h2>
+<p>Discursive units, sequential structure</p>
+<p><em>modeled by</em></p>
+<p>OHCO<br />
+relational data model<br />
+Vector Space Representations</p>
+</section>
+<section class="slide level1">
+
+<p>Each level, from language to document, involves an increasing amount of <strong>choice</strong></p>
+<p>Therefore, each level involves <strong>increasing information</strong><br />
+(since information is choice)</p>
+</section>
+<section id="observations" class="slide level1">
+<h1>Observations</h1>
+</section>
+<section class="slide level1">
+
+<h2 id="observation-1" class="center">Observation 1</h2>
+<p><strong>Information theory</strong> is fundamental to text analytics</p>
+<p>Information theory models both the <strong>generative</strong> and the <strong>generated</strong> levels of language</p>
+<p>Information theory provides a <strong>unified language</strong> into which most of text analytics can be translated</p>
+</section>
+<section class="slide level1">
+
+<p><img data-src="images/Figure-no-2-Shannon-Weaver-Information-Theory-1949-This-diagram-refers-to-the_W640.jpg" /></p>
+<p>Message = Text</p>
+</section>
+<section class="slide level1">
+
+<h2 id="observation-2" class="center">Observation 2</h2>
+<p>The Library of Babel is a <strong>counter-factual narrative</strong> about information</p>
+<p>It posits a world in which information is <strong>absent</strong></p>
+<p>A world of <strong>maximum entropy</strong><br />
+(where every possibility is equally probable)</p>
+</section>
+<section class="slide level1">
+
+<h2 id="observation-3" class="center">Observation 3</h2>
+<p>Texts are <strong>sensors</strong></p>
+<p>They are <strong>transducers</strong> of external social events and internal pyschological dispositions<br />
+(Relative to the author)</p>
+<p>Text analytic methods surface the “images”<br />
+left by these causes</p>
+</section>
+<section class="slide level1">
+
+<h2 id="observation-4" class="center">Observation 4</h2>
+<p>The information deposited by these images is of two kinds:</p>
+<p>1 Structural and static</p>
+<p>2 Sequential and dynamic</p>
+</section>
+<section class="slide level1">
+
+<p>Structural information consists of things like language <strong>categories</strong>, <strong>analogies</strong>, principal <strong>components</strong>, <strong>topics</strong>, and <strong>networks</strong> of these things</p>
+<p>These analytical artifacts reflect, directly or indirectly,<br />
+fixed <strong>cognitive structures</strong></p>
+<p>These structures can be investigated through<br />
+measures of <strong>similarity</strong> and <strong>contiguity</strong></p>
+<p>i.e. machine learning acts as an associationist <strong>Hume Machine</strong></p>
+</section>
+<section class="slide level1">
+
+<p>Sequential information consists of <strong>events</strong> and other time-based information</p>
+<p>These reflect life events and social processes</p>
+<p>Collections of texts over time reveal these changes, as in newspapers or corpora over time</p>
+</section>
+<section class="slide level1">
+
+<h2 id="observation-5" class="center">Observation 5</h2>
+<p>Narratives are <strong>reduced representations</strong> of social process</p>
+<p>Narrative strucutres exist in <strong>fiction</strong> and <strong>non-fiction</strong></p>
+<p>Fiction is True!</p>
+</section>
+<section class="slide level1">
+
+<p><img data-src="images/Aristotle&#39;s_Tragic_Plot_Structure.pdf.jpg" /></p>
+</section>
+<section class="slide level1">
+
+<p><img data-src="images/1-Social-drama-versus-aesthetic-drama-infinity-loop-Schechner-1977-1988.png" /></p>
+</section>
+<section class="slide level1">
+
+<p><img data-src="images/churinga-line-drawing.png" /> <img data-src="images/churinga-image.png" /></p>
+</section>
+<section id="plus-delta" class="slide level1 center">
+<h1>Plus Delta</h1>
+<p>Please fill out the <strong>Plus Delta form</strong> on the menu of the Collab site</p>
+</section>
+<section id="thanks" class="slide level1">
+<h1>Thanks!</h1>
+</section>
+    </div>
+  </div>
+
+  <script src="https://revealjs.com/lib/js/head.min.js"></script>
+  <script src="https://revealjs.com/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://revealjs.com/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://revealjs.com/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://revealjs.com/plugin/math/math.js', async: true },
+          { src: 'https://revealjs.com/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
